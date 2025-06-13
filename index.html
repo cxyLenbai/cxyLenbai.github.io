@@ -3,174 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>算法 - cxyLenbai 的个人网站</title>
+    <title>cxyLenbai 的个人网站</title>
     <style>
-        /* 基础样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-        
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
+            line-height: 1.6;
         }
-        
-        /* 左侧导航栏样式 */
-        .sidebar {
-            width: 250px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 20px;
-            position: sticky;
-            top: 20px;
-            height: fit-content;
-        }
-        
-        .sidebar h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        .nav-list {
-            list-style: none;
-        }
-        
-        .nav-list li {
-            margin-bottom: 15px;
-        }
-        
-        .nav-list a {
+        .avatar {
             display: block;
-            padding: 10px 15px;
-            color: #3498db;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
         }
-        
-        .nav-list a:hover {
-            background-color: #e8f4fc;
-            color: #2980b9;
-            padding-left: 20px;
-        }
-        
-        .nav-list a.active {
-            background-color: #3498db;
-            color: white;
+        .name {
+            text-align: center;
+            font-size: 24px;
             font-weight: bold;
-        }
-        
-        /* 右侧内容区样式 */
-        .content {
-            flex: 1;
-            margin-left: 30px;
-        }
-        
-        .section {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 30px;
             margin-bottom: 30px;
         }
-        
-        .section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e6ed;
+        .components {
+            list-style: none;
+            padding: 0;
         }
-        
-        .section p {
+        .components li {
             margin-bottom: 15px;
-            color: #555;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                margin-bottom: 30px;
-                position: static;
-            }
-            
-            .content {
-                margin-left: 0;
-            }
+        .components a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .components a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        .component-title {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 左侧导航栏 -->
-        <aside class="sidebar">
-            <h2>算法分类</h2>
-            <ul class="nav-list">
-                <li><a href="#machine-learning" class="active">机器学习</a></li>
-                <li><a href="#reinforcement-learning">强化学习</a></li>
-                <li><a href="#deep-learning">深度学习</a></li>
-            </ul>
-        </aside>
-        
-        <!-- 右侧内容区 -->
-        <main class="content">
-            <!-- 机器学习部分 -->
-            <section id="machine-learning" class="section">
-                <h2>机器学习</h2>
-                <p>机器学习是人工智能的一个分支，它关注于开发能够从数据中学习的算法。与传统的手动编程不同，机器学习算法能够自动从经验中改进。</p>
-                <p>常见的机器学习算法包括：监督学习（如决策树、支持向量机）、无监督学习（如聚类、降维）和半监督学习。</p>
-                <p>应用领域：图像识别、自然语言处理、推荐系统等。</p>
-            </section>
-            
-            <!-- 强化学习部分 -->
-            <section id="reinforcement-learning" class="section">
-                <h2>强化学习</h2>
-                <p>强化学习是机器学习的一种方法，它通过智能体与环境的交互来学习最优行为策略。智能体通过采取行动并观察结果（奖励或惩罚）来逐步改进策略。</p>
-                <p>强化学习的核心要素包括：状态、动作、奖励、策略和环境。著名的算法包括Q-learning、SARSA和深度Q网络(DQN)。</p>
-                <p>应用领域：游戏AI（如AlphaGo）、机器人控制、资源管理等。</p>
-            </section>
-            
-            <!-- 深度学习部分 -->
-            <section id="deep-learning" class="section">
-                <h2>深度学习</h2>
-                <p>深度学习是机器学习的一个子领域，它基于多层神经网络来学习数据的抽象表示。深度学习模型能够自动从原始数据中提取特征，无需手动特征工程。</p>
-                <p>常见的深度学习架构包括：卷积神经网络(CNN)、循环神经网络(RNN)、长短期记忆网络(LSTM)和Transformer模型。</p>
-                <p>应用领域：图像生成、语音识别、机器翻译、自动驾驶等。</p>
-            </section>
-        </main>
-    </div>
-
-    <script>
-        // 实现导航栏点击效果
-        const navLinks = document.querySelectorAll('.nav-list a');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                // 移除所有链接的active类
-                navLinks.forEach(l => l.classList.remove('active'));
-                // 为当前点击的链接添加active类
-                this.classList.add('active');
-            });
-        });
-    </script>
+    <!-- 第一行：头像 -->
+    <img src="https://th.bing.com/th/id/R.c03e9e1891de5ad275a952e831417cd5?rik=X%2ffBuPgghOjFMA&riu=http%3a%2f%2fphotos.kzwr.com%2ffiles%2f6800bed6ff35409d88e2ac6d5626df8dus1x.jpeg&ehk=1omJ5sQan26OCLiVNsU8k4Sg27ddkMT4usUmcvv7T4Q%3d&risl=&pid=ImgRaw&r=0" alt="cxyLenbai 的头像" class="avatar">
+    
+    <!-- 第二行：名字 -->
+    <div class="name">cxyLenbai</div>
+    
+    <!-- 第三行：四个组件链接 -->
+    <ul class="components">
+        <li>
+            <a href="front-end.html">
+                <span class="component-title">前端</span>
+            </a>
+        </li>
+        <li>
+            <a href="back-end.html">
+                <span class="component-title">后端</span>
+            </a>
+        </li>
+        <li>
+            <a href="algorithm.html">
+                <span class="component-title">算法</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/cxyLenbai?tab=repositories" target="_blank">
+                <span class="component-title">Github主页</span>
+            </a>
+        </li>
+    </ul>
 </body>
 </html>
