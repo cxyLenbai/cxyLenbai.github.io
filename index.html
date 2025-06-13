@@ -1,8 +1,84 @@
-<p>Hello 大家好</p>
-<p>我是霸都丶傲天，这是我的个人网站。 </p>
-<p>很高兴你来到这里, 你可以在以下的网站找到我</p>
-
-<ul>
-  <li> <a href="https://www.zhihu.com/people/AJLoveChina">知乎</a> </li>
-  <li> <a href="http://hejie.nigeerhuo.com">我的博客(已经不更细了,现在在知乎写文章)</a> </li>
-</ul>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cxyLenbai 的个人网站</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .avatar {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+        }
+        .name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .components {
+            list-style: none;
+            padding: 0;
+        }
+        .components li {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .components a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .components a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        .component-title {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一行：头像 -->
+    <img src="https://th.bing.com/th/id/R.c03e9e1891de5ad275a952e831417cd5?rik=X%2ffBuPgghOjFMA&riu=http%3a%2f%2fphotos.kzwr.com%2ffiles%2f6800bed6ff35409d88e2ac6d5626df8dus1x.jpeg&ehk=1omJ5sQan26OCLiVNsU8k4Sg27ddkMT4usUmcvv7T4Q%3d&risl=&pid=ImgRaw&r=0" alt="cxyLenbai 的头像" class="avatar">
+    
+    <!-- 第二行：名字 -->
+    <div class="name">cxyLenbai</div>
+    
+    <!-- 第三行：四个组件链接 -->
+    <ul class="components">
+        <li>
+            <a href="front-end.html">
+                <span class="component-title">前端</span>
+            </a>
+        </li>
+        <li>
+            <a href="back-end.html">
+                <span class="component-title">后端</span>
+            </a>
+        </li>
+        <li>
+            <a href="algorithm.html">
+                <span class="component-title">算法</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/cxyLenbai?tab=repositories" target="_blank">
+                <span class="component-title">Github主页</span>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>
