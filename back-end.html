@@ -1,1 +1,331 @@
-后端页面
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后端 - cxyLenbai 的个人网站</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        /* 顶部导航 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .home-link {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .home-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        /* 左侧导航栏样式 */
+        .sidebar {
+            width: 280px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 25px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .sidebar:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        .sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #3498db;
+            font-size: 1.4rem;
+        }
+        
+        .nav-category {
+            margin-bottom: 25px;
+        }
+        
+        .nav-category h3 {
+            color: #34495e;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            padding-left: 8px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .nav-list {
+            list-style: none;
+        }
+        
+        .nav-list li {
+            margin-bottom: 10px;
+        }
+        
+        .nav-list a {
+            display: block;
+            padding: 10px 15px;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e8f4fc;
+            color: #2980b9;
+            padding-left: 20px;
+        }
+        
+        .nav-list a.active {
+            background-color: #3498db;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* 右侧内容区样式 */
+        .content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 35px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e6ed;
+            font-size: 1.5rem;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>后端技术</h1>
+        <a href="index.html" class="home-link">← 返回首页</a>
+    </div>
+    
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <h2>后端内容导航</h2>
+            
+            <div class="nav-category">
+                <h3>知识沉淀</h3>
+                <ul class="nav-list">
+                    <li><a href="#java-八股" class="active">Java八股</a></li>
+                    <li><a href="#go-八股">Go八股</a></li>
+                    <li><a href="#cpp-八股">C++八股</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-category">
+                <h3>个人项目</h3>
+                <ul class="nav-list">
+                    <li><a href="#java-projects">Java个人项目</a></li>
+                    <li><a href="#cpp-projects">C++个人项目</a></li>
+                    <li><a href="#go-projects">Go个人项目</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- 右侧内容区 -->
+        <main class="content">
+            <!-- Java八股部分 -->
+            <section id="java-八股" class="section">
+                <h2>Java八股</h2>
+                <div class="card">
+                    <h3>Java基础</h3>
+                    <p>包括Java面向对象特性、封装、继承、多态、接口与抽象类的区别、异常处理机制等核心概念。</p>
+                </div>
+                <div class="card">
+                    <h3>集合框架</h3>
+                    <p>HashMap、ArrayList、LinkedList等集合的实现原理，线程安全集合与非线程安全集合的区别。</p>
+                </div>
+                <p>Java八股文涵盖了Java编程语言的核心知识点和面试常见问题，是Java开发者求职面试的重要准备内容。</p>
+            </section>
+            
+            <!-- Go八股部分 -->
+            <section id="go-八股" class="section">
+                <h2>Go八股</h2>
+                <div class="card">
+                    <h3>Go语言特性</h3>
+                    <p>包括Go的并发模型（goroutine、channel）、内存管理、垃圾回收机制以及Go语言的设计哲学。</p>
+                </div>
+                <p>Go语言作为一门新兴的系统级编程语言，其八股文内容主要围绕并发编程、内存模型和语言特性展开。</p>
+            </section>
+            
+            <!-- C++八股部分 -->
+            <section id="cpp-八股" class="section">
+                <h2>C++八股</h2>
+                <div class="card">
+                    <h3>C++核心特性</h3>
+                    <p>包括面向对象、模板、STL标准库、智能指针、内存管理、多线程编程等关键知识点。</p>
+                </div>
+                <p>C++八股文覆盖了从基础语法到高级特性的各个方面，尤其注重内存管理和性能优化相关内容。</p>
+            </section>
+            
+            <!-- Java个人项目部分 -->
+            <section id="java-projects" class="section">
+                <h2>Java个人项目</h2>
+                <p>这里展示使用Java语言开发的个人项目，包括项目介绍、技术栈和实现细节。</p>
+                <div class="card">
+                    <h3>项目示例</h3>
+                    <p>例如：Spring Boot后端服务、Java Swing桌面应用、Android移动应用等。</p>
+                </div>
+            </section>
+            
+            <!-- C++个人项目部分 -->
+            <section id="cpp-projects" class="section">
+                <h2>C++个人项目</h2>
+                <p>这里展示使用C++语言开发的个人项目，包括系统级应用、高性能计算程序等。</p>
+            </section>
+            
+            <!-- Go个人项目部分 -->
+            <section id="go-projects" class="section">
+                <h2>Go个人项目</h2>
+                <p>这里展示使用Go语言开发的个人项目，包括微服务、命令行工具、云原生应用等。</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 实现导航栏点击效果和滚动定位
+        const navLinks = document.querySelectorAll('.nav-list a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 移除所有链接的active类
+                navLinks.forEach(l => l.classList.remove('active'));
+                // 为当前点击的链接添加active类
+                this.classList.add('active');
+                
+                // 滚动到对应区域
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 监听滚动，自动高亮当前区域对应的导航
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            let currentSectionId = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
