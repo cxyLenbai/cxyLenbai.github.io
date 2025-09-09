@@ -3,89 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>后端 - cxyLenbai 的个人网站</title>
+    <title>后端技术 - cxyLenbai</title>
+    <!-- 引入外部资源 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* 基础样式 */
+        /* 全局样式重置与基础设置 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+        }
+        
+        :root {
+            --primary: #00f0ff;
+            --secondary: #9d4edd;
+            --dark: #0d1b2a;
+            --light: #e0e1dd;
+            --glow: 0 0 15px rgba(0, 240, 255, 0.7);
+            --glow-secondary: 0 0 15px rgba(157, 78, 221, 0.7);
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: var(--light);
+            position: relative;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #000000, #0a0a0a, #1a0033, #000a1a);
+        }
+        
+        /* 超链接样式 */
+        a {
+            color: white !important;
+            text-decoration: none !important;
+        }
+        
+        a:hover, a:focus {
+            color: var(--primary) !important;
+            text-decoration: none !important;
+        }
+        
+        /* 赛博朋克背景层 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(0, 240, 255, 0.2) 2px, transparent 2px),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 240, 255, 0.03) 2px,
+                    rgba(0, 240, 255, 0.03) 4px
+                ),
+                linear-gradient(90deg, 
+                    transparent 24%, 
+                    rgba(0, 240, 255, 0.05) 25%, 
+                    rgba(0, 240, 255, 0.05) 26%, 
+                    transparent 27%, 
+                    transparent 74%, 
+                    rgba(255, 0, 150, 0.05) 75%, 
+                    rgba(255, 0, 150, 0.05) 76%, 
+                    transparent 77%
+                );
+            background-size: 50px 50px, 4px 4px, 100px 100px;
+            z-index: 0;
+            animation: cyberMove 20s linear infinite;
+        }
+        
+        /* 粒子和光晕效果 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .hologram-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(0,240,255,0) 70%);
+            z-index: 1;
+            filter: blur(50px);
+            animation: pulse 8s infinite ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* 赛博朋克扫描线 */
+        .cyber-scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 240, 255, 0.02) 2px,
+                rgba(0, 240, 255, 0.02) 4px
+            );
+            z-index: 2;
+            animation: scanlines 0.1s linear infinite;
+            pointer-events: none;
+        }
+        
+        /* 数据流效果 */
+        .data-stream {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(0, 255, 0, 0.1) 25%, 
+                    transparent 50%, 
+                    rgba(0, 240, 255, 0.1) 75%, 
+                    transparent 100%
+                );
+            background-size: 200px 100%;
+            z-index: 1;
+            animation: dataFlow 8s linear infinite;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 3;
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 20px;
+            display: flex;
+            gap: 30px;
+            min-height: 100vh;
         }
         
         /* 顶部导航 */
         .header {
+            position: relative;
+            z-index: 3;
             text-align: center;
-            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: rgba(13, 27, 42, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
         }
         
         .header h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            text-shadow: var(--glow);
+            animation: fadeInUp 1s ease;
         }
         
         .home-link {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
+            color: var(--light) !important;
+            text-decoration: none !important;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 25px;
+            background: rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
         
         .home-link:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
+            color: var(--primary) !important;
+            border-color: var(--primary);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
         }
         
         /* 左侧导航栏样式 */
         .sidebar {
-            width: 280px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 25px;
+            width: 320px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
             position: sticky;
             top: 20px;
             height: fit-content;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         
         .sidebar:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            border-color: var(--primary);
+            box-shadow: var(--glow), 0 8px 32px rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px);
         }
         
         .sidebar h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #3498db;
-            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+            font-size: 1.6rem;
+            text-shadow: var(--glow);
+            text-align: center;
         }
         
         .nav-category {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .nav-category h3 {
-            color: #34495e;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-            padding-left: 8px;
-            border-left: 3px solid #3498db;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            padding-left: 12px;
+            border-left: 3px solid var(--secondary);
+            text-shadow: var(--glow-secondary);
         }
         
         .nav-list {
@@ -93,30 +245,35 @@
         }
         
         .nav-list li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .nav-list a {
             display: block;
-            padding: 10px 15px;
-            color: #3498db;
-            text-decoration: none;
-            border-radius: 6px;
+            padding: 12px 18px;
+            color: var(--light) !important;
+            text-decoration: none !important;
+            border-radius: 8px;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            border: 1px solid transparent;
+            background: rgba(0, 0, 0, 0.2);
         }
         
         .nav-list a:hover {
-            background-color: #e8f4fc;
-            color: #2980b9;
-            padding-left: 20px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary) !important;
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
         }
         
         .nav-list a.active {
-            background-color: #3498db;
-            color: white;
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+            background: rgba(0, 240, 255, 0.2);
+            color: var(--primary) !important;
+            border-color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--glow);
         }
         
         /* 右侧内容区样式 */
@@ -126,51 +283,144 @@
         }
         
         .section {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 35px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 15px;
+            padding: 40px;
             margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .section:hover::before {
+            left: 100%;
         }
         
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: var(--glow), 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
         .section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e6ed;
-            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.3);
+            font-size: 1.8rem;
+            text-shadow: var(--glow);
+            position: relative;
+            z-index: 1;
         }
         
         .section p {
-            margin-bottom: 15px;
-            color: #555;
+            margin-bottom: 18px;
+            color: var(--light);
             line-height: 1.8;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
         }
         
         .card {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
             margin-bottom: 20px;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid var(--secondary);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card:hover {
+            border-color: var(--secondary);
+            box-shadow: var(--glow-secondary);
+            transform: translateX(10px);
         }
         
         .card h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            text-shadow: var(--glow-secondary);
+        }
+        
+        .card p {
+            color: rgba(224, 225, 221, 0.9);
+            margin-bottom: 0;
+        }
+        
+        /* 动画定义 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+        
+        @keyframes cyberMove {
+            0% { 
+                background-position: 0 0, 0 0, 0 0;
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                background-position: 25px 25px, 2px 2px, 50px 50px;
+                filter: hue-rotate(90deg);
+            }
+            100% { 
+                background-position: 50px 50px, 4px 4px, 100px 100px;
+                filter: hue-rotate(180deg);
+            }
+        }
+        
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+        
+        @keyframes dataFlow {
+            0% { 
+                background-position: -200px 0;
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% { 
+                background-position: calc(100% + 200px) 0;
+                opacity: 0.2;
+            }
         }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
+                gap: 20px;
             }
             
             .sidebar {
@@ -179,42 +429,52 @@
                 margin-bottom: 20px;
             }
             
-            .content {
-                margin-left: 0;
+            .section {
+                padding: 25px;
             }
             
-            .section {
-                padding: 20px;
+            .header h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- 背景元素 -->
+    <div class="grid-bg"></div>
+    <div id="particles-js"></div>
+    <div class="hologram-glow"></div>
+    <div class="cyber-scanlines"></div>
+    <div class="data-stream"></div>
+    
     <div class="header">
-        <h1>后端技术</h1>
-        <a href="index.html" class="home-link">← 返回首页</a>
+        <h1><i class="fas fa-server" style="margin-right: 15px;"></i>后端技术</h1>
+        <a href="index.html" class="home-link">
+            <i class="fas fa-arrow-left"></i>
+            返回首页
+        </a>
     </div>
     
     <div class="container">
         <!-- 左侧导航栏 -->
         <aside class="sidebar">
-            <h2>后端内容导航</h2>
+            <h2><i class="fas fa-list-ul" style="margin-right: 10px;"></i>后端内容导航</h2>
             
             <div class="nav-category">
-                <h3>知识沉淀</h3>
+                <h3><i class="fas fa-brain" style="margin-right: 8px;"></i>知识沉淀</h3>
                 <ul class="nav-list">
-                    <li><a href="#java-八股" class="active">Java八股</a></li>
-                    <li><a href="#go-八股">Go八股</a></li>
-                    <li><a href="#cpp-八股">C++八股</a></li>
+                    <li><a href="#java-八股" class="active"><i class="fab fa-java" style="margin-right: 8px;"></i>Java八股</a></li>
+                    <li><a href="#go-八股"><i class="fab fa-golang" style="margin-right: 8px;"></i>Go八股</a></li>
+                    <li><a href="#cpp-八股"><i class="fas fa-code" style="margin-right: 8px;"></i>C++八股</a></li>
                 </ul>
             </div>
             
             <div class="nav-category">
-                <h3>个人项目</h3>
+                <h3><i class="fas fa-project-diagram" style="margin-right: 8px;"></i>个人项目</h3>
                 <ul class="nav-list">
-                    <li><a href="#java-projects">Java个人项目</a></li>
-                    <li><a href="#cpp-projects">C++个人项目</a></li>
-                    <li><a href="#go-projects">Go个人项目</a></li>
+                    <li><a href="#java-projects"><i class="fab fa-java" style="margin-right: 8px;"></i>Java个人项目</a></li>
+                    <li><a href="#cpp-projects"><i class="fas fa-code" style="margin-right: 8px;"></i>C++个人项目</a></li>
+                    <li><a href="#go-projects"><i class="fab fa-golang" style="margin-right: 8px;"></i>Go个人项目</a></li>
                 </ul>
             </div>
         </aside>
@@ -223,63 +483,178 @@
         <main class="content">
             <!-- Java八股部分 -->
             <section id="java-八股" class="section">
-                <h2>Java八股</h2>
+                <h2><i class="fab fa-java" style="margin-right: 12px;"></i>Java八股</h2>
                 <div class="card">
-                    <h3>Java基础</h3>
-                    <p>包括Java面向对象特性、封装、继承、多态、接口与抽象类的区别、异常处理机制等核心概念。</p>
+                    <h3><i class="fas fa-cube" style="margin-right: 8px;"></i>Java基础</h3>
+                    <p>包括Java面向对象特性、封装、继承、多态、接口与抽象类的区别、异常处理机制等核心概念。深入理解JVM内存模型、垃圾回收机制和类加载过程。</p>
                 </div>
                 <div class="card">
-                    <h3>集合框架</h3>
-                    <p>HashMap、ArrayList、LinkedList等集合的实现原理，线程安全集合与非线程安全集合的区别。</p>
+                    <h3><i class="fas fa-database" style="margin-right: 8px;"></i>集合框架</h3>
+                    <p>HashMap、ArrayList、LinkedList等集合的实现原理，线程安全集合与非线程安全集合的区别。深入分析ConcurrentHashMap、TreeMap等高级数据结构。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-sync-alt" style="margin-right: 8px;"></i>并发编程</h3>
+                    <p>线程池、锁机制、volatile关键字、synchronized原理、AQS框架等并发编程核心知识点。</p>
                 </div>
                 <p>Java八股文涵盖了Java编程语言的核心知识点和面试常见问题，是Java开发者求职面试的重要准备内容。</p>
             </section>
             
             <!-- Go八股部分 -->
             <section id="go-八股" class="section">
-                <h2>Go八股</h2>
+                <h2><i class="fab fa-golang" style="margin-right: 12px;"></i>Go八股</h2>
                 <div class="card">
-                    <h3>Go语言特性</h3>
-                    <p>包括Go的并发模型（goroutine、channel）、内存管理、垃圾回收机制以及Go语言的设计哲学。</p>
+                    <h3><i class="fas fa-rocket" style="margin-right: 8px;"></i>Go语言特性</h3>
+                    <p>包括Go的并发模型（goroutine、channel）、内存管理、垃圾回收机制以及Go语言的设计哲学。深入理解interface、defer、panic/recover等核心特性。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-network-wired" style="margin-right: 8px;"></i>并发模型</h3>
+                    <p>Goroutine调度器原理、Channel通信机制、select语句、context包的使用等并发编程要点。</p>
                 </div>
                 <p>Go语言作为一门新兴的系统级编程语言，其八股文内容主要围绕并发编程、内存模型和语言特性展开。</p>
             </section>
             
             <!-- C++八股部分 -->
             <section id="cpp-八股" class="section">
-                <h2>C++八股</h2>
+                <h2><i class="fas fa-code" style="margin-right: 12px;"></i>C++八股</h2>
                 <div class="card">
-                    <h3>C++核心特性</h3>
-                    <p>包括面向对象、模板、STL标准库、智能指针、内存管理、多线程编程等关键知识点。</p>
+                    <h3><i class="fas fa-cogs" style="margin-right: 8px;"></i>C++核心特性</h3>
+                    <p>包括面向对象、模板、STL标准库、智能指针、内存管理、多线程编程等关键知识点。深入理解RAII、移动语义、完美转发等现代C++特性。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-memory" style="margin-right: 8px;"></i>内存管理</h3>
+                    <p>堆栈内存分配、智能指针（shared_ptr、unique_ptr、weak_ptr）、内存泄漏检测与预防。</p>
                 </div>
                 <p>C++八股文覆盖了从基础语法到高级特性的各个方面，尤其注重内存管理和性能优化相关内容。</p>
             </section>
             
             <!-- Java个人项目部分 -->
             <section id="java-projects" class="section">
-                <h2>Java个人项目</h2>
+                <h2><i class="fab fa-java" style="margin-right: 12px;"></i>Java个人项目</h2>
                 <p>这里展示使用Java语言开发的个人项目，包括项目介绍、技术栈和实现细节。</p>
                 <div class="card">
-                    <h3>项目示例</h3>
-                    <p>例如：Spring Boot后端服务、Java Swing桌面应用、Android移动应用等。</p>
+                    <h3><i class="fas fa-project-diagram" style="margin-right: 8px;"></i>Spring Boot微服务</h3>
+                    <p>基于Spring Boot、Spring Cloud构建的微服务架构项目，包含用户管理、订单系统、支付网关等模块。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-desktop" style="margin-right: 8px;"></i>桌面应用程序</h3>
+                    <p>使用Java Swing或JavaFX开发的桌面应用，如文件管理器、图像处理工具等。</p>
                 </div>
             </section>
             
             <!-- C++个人项目部分 -->
             <section id="cpp-projects" class="section">
-                <h2>C++个人项目</h2>
+                <h2><i class="fas fa-code" style="margin-right: 12px;"></i>C++个人项目</h2>
                 <p>这里展示使用C++语言开发的个人项目，包括系统级应用、高性能计算程序等。</p>
+                <div class="card">
+                    <h3><i class="fas fa-microchip" style="margin-right: 8px;"></i>高性能计算</h3>
+                    <p>基于C++开发的并行计算程序，利用OpenMP、CUDA等技术进行性能优化。</p>
+                </div>
             </section>
             
             <!-- Go个人项目部分 -->
             <section id="go-projects" class="section">
-                <h2>Go个人项目</h2>
+                <h2><i class="fab fa-golang" style="margin-right: 12px;"></i>Go个人项目</h2>
                 <p>这里展示使用Go语言开发的个人项目，包括微服务、命令行工具、云原生应用等。</p>
+                <div class="card">
+                    <h3><i class="fas fa-cloud" style="margin-right: 8px;"></i>云原生应用</h3>
+                    <p>基于Go语言开发的容器化微服务，部署在Kubernetes集群中，具备高可用和自动扩缩容能力。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-terminal" style="margin-right: 8px;"></i>命令行工具</h3>
+                    <p>开发的各种CLI工具，如文件处理器、API测试工具、系统监控工具等。</p>
+                </div>
             </section>
         </main>
     </div>
 
+    <!-- 粒子动画脚本 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // 赛博朋克粒子动画配置
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 1000
+                    }
+                },
+                "color": {
+                    "value": ["#00f0ff", "#ff0080", "#8000ff", "#00ff80"]
+                },
+                "shape": {
+                    "type": ["circle", "triangle"],
+                    "triangle": {
+                        "nb_sides": 3
+                    }
+                },
+                "opacity": {
+                    "value": 0.6,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 3,
+                        "size_min": 0.5,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 120,
+                    "color": "#00f0ff",
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1.5,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "bounce",
+                    "bounce": true
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 200,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        
         // 实现导航栏点击效果和滚动定位
         const navLinks = document.querySelectorAll('.nav-list a');
         
@@ -298,31 +673,30 @@
                 
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 20,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
             });
         });
         
-        // 监听滚动，自动高亮当前区域对应的导航
+        // 滚动时更新导航状态
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('.section');
-            let currentSectionId = '';
+            const scrollPos = window.scrollY + 150;
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
                 
-                if (pageYOffset >= (sectionTop - 100)) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             });
         });
