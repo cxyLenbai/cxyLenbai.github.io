@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>后端技术 - cxyLenbai</title>
+    <title>前端技术 - cxyLenbai</title>
     <!-- 引入外部资源 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -448,7 +448,7 @@
     <div class="data-stream"></div>
     
     <div class="header">
-        <h1><i class="fas fa-server" style="margin-right: 15px;"></i>后端技术</h1>
+        <h1><i class="fas fa-code" style="margin-right: 15px;"></i>前端技术</h1>
         <a href="index.html" class="home-link">
             <i class="fas fa-arrow-left"></i>
             返回首页
@@ -458,110 +458,149 @@
     <div class="container">
         <!-- 左侧导航栏 -->
         <aside class="sidebar">
-            <h2><i class="fas fa-list-ul" style="margin-right: 10px;"></i>后端内容导航</h2>
+            <h2><i class="fas fa-list-ul" style="margin-right: 10px;"></i>前端内容导航</h2>
             
             <div class="nav-category">
                 <h3><i class="fas fa-brain" style="margin-right: 8px;"></i>知识沉淀</h3>
                 <ul class="nav-list">
-                    <li><a href="#java-八股" class="active"><i class="fab fa-java" style="margin-right: 8px;"></i>Java八股</a></li>
-                    <li><a href="#go-八股"><i class="fab fa-golang" style="margin-right: 8px;"></i>Go八股</a></li>
-                    <li><a href="#cpp-八股"><i class="fas fa-code" style="margin-right: 8px;"></i>C++八股</a></li>
+                    <li><a href="#html-css" class="active"><i class="fab fa-html5" style="margin-right: 8px;"></i>HTML & CSS</a></li>
+                    <li><a href="#javascript"><i class="fab fa-js-square" style="margin-right: 8px;"></i>JavaScript</a></li>
+                    <li><a href="#frameworks"><i class="fab fa-react" style="margin-right: 8px;"></i>前端框架</a></li>
+                    <li><a href="#tools"><i class="fas fa-tools" style="margin-right: 8px;"></i>开发工具</a></li>
                 </ul>
             </div>
             
             <div class="nav-category">
                 <h3><i class="fas fa-project-diagram" style="margin-right: 8px;"></i>个人项目</h3>
                 <ul class="nav-list">
-                    <li><a href="#java-projects"><i class="fab fa-java" style="margin-right: 8px;"></i>Java个人项目</a></li>
-                    <li><a href="#cpp-projects"><i class="fas fa-code" style="margin-right: 8px;"></i>C++个人项目</a></li>
-                    <li><a href="#go-projects"><i class="fab fa-golang" style="margin-right: 8px;"></i>Go个人项目</a></li>
+                    <li><a href="#react-projects"><i class="fab fa-react" style="margin-right: 8px;"></i>React项目</a></li>
+                    <li><a href="#vue-projects"><i class="fab fa-vuejs" style="margin-right: 8px;"></i>Vue项目</a></li>
+                    <li><a href="#vanilla-projects"><i class="fas fa-code" style="margin-right: 8px;"></i>原生JS项目</a></li>
                 </ul>
             </div>
         </aside>
         
         <!-- 右侧内容区 -->
         <main class="content">
-            <!-- Java八股部分 -->
-            <section id="java-八股" class="section">
-                <h2><i class="fab fa-java" style="margin-right: 12px;"></i>Java八股</h2>
+            <!-- HTML & CSS部分 -->
+            <section id="html-css" class="section">
+                <h2><i class="fab fa-html5" style="margin-right: 12px;"></i>HTML & CSS</h2>
                 <div class="card">
-                    <h3><i class="fas fa-cube" style="margin-right: 8px;"></i>Java基础</h3>
-                    <p>包括Java面向对象特性、封装、继承、多态、接口与抽象类的区别、异常处理机制等核心概念。深入理解JVM内存模型、垃圾回收机制和类加载过程。</p>
+                    <h3><i class="fas fa-code" style="margin-right: 8px;"></i>HTML基础</h3>
+                    <p>包括HTML语义化标签、文档结构、表单元素、多媒体标签等核心知识。深入理解HTML5新特性，如Canvas、Web Storage、Web Workers等。</p>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-database" style="margin-right: 8px;"></i>集合框架</h3>
-                    <p>HashMap、ArrayList、LinkedList等集合的实现原理，线程安全集合与非线程安全集合的区别。深入分析ConcurrentHashMap、TreeMap等高级数据结构。</p>
+                    <h3><i class="fas fa-paint-brush" style="margin-right: 8px;"></i>CSS进阶</h3>
+                    <p>CSS选择器、盒模型、Flexbox、Grid布局、CSS动画与过渡效果。掌握CSS预处理器（Sass、Less）和CSS-in-JS等现代开发方式。</p>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-sync-alt" style="margin-right: 8px;"></i>并发编程</h3>
-                    <p>线程池、锁机制、volatile关键字、synchronized原理、AQS框架等并发编程核心知识点。</p>
+                    <h3><i class="fas fa-mobile-alt" style="margin-right: 8px;"></i>响应式设计</h3>
+                    <p>移动优先设计理念、媒体查询、弹性布局、适配不同设备尺寸的最佳实践。</p>
                 </div>
-                <p>Java八股文涵盖了Java编程语言的核心知识点和面试常见问题，是Java开发者求职面试的重要准备内容。</p>
+                <p>HTML与CSS是前端开发的基石，掌握这些技术是成为优秀前端开发者的第一步。</p>
             </section>
             
-            <!-- Go八股部分 -->
-            <section id="go-八股" class="section">
-                <h2><i class="fab fa-golang" style="margin-right: 12px;"></i>Go八股</h2>
+            <!-- JavaScript部分 -->
+            <section id="javascript" class="section">
+                <h2><i class="fab fa-js-square" style="margin-right: 12px;"></i>JavaScript</h2>
                 <div class="card">
-                    <h3><i class="fas fa-rocket" style="margin-right: 8px;"></i>Go语言特性</h3>
-                    <p>包括Go的并发模型（goroutine、channel）、内存管理、垃圾回收机制以及Go语言的设计哲学。深入理解interface、defer、panic/recover等核心特性。</p>
+                    <h3><i class="fas fa-cogs" style="margin-right: 8px;"></i>ES6+特性</h3>
+                    <p>箭头函数、解构赋值、模板字符串、Promise、async/await、模块化等现代JavaScript特性。深入理解闭包、原型链、事件循环机制。</p>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-network-wired" style="margin-right: 8px;"></i>并发模型</h3>
-                    <p>Goroutine调度器原理、Channel通信机制、select语句、context包的使用等并发编程要点。</p>
+                    <h3><i class="fas fa-globe" style="margin-right: 8px;"></i>DOM操作</h3>
+                    <p>DOM API、事件处理、AJAX/Fetch、本地存储等Web API的使用。掌握虚拟DOM概念和性能优化技巧。</p>
                 </div>
-                <p>Go语言作为一门新兴的系统级编程语言，其八股文内容主要围绕并发编程、内存模型和语言特性展开。</p>
+                <div class="card">
+                    <h3><i class="fas fa-code-branch" style="margin-right: 8px;"></i>函数式编程</h3>
+                    <p>高阶函数、纯函数、不可变性、函数组合等函数式编程概念在JavaScript中的应用。</p>
+                </div>
+                <p>JavaScript是前端开发的核心语言，从基础语法到高级特性都需要深入掌握。</p>
             </section>
             
-            <!-- C++八股部分 -->
-            <section id="cpp-八股" class="section">
-                <h2><i class="fas fa-code" style="margin-right: 12px;"></i>C++八股</h2>
+            <!-- 前端框架部分 -->
+            <section id="frameworks" class="section">
+                <h2><i class="fab fa-react" style="margin-right: 12px;"></i>前端框架</h2>
                 <div class="card">
-                    <h3><i class="fas fa-cogs" style="margin-right: 8px;"></i>C++核心特性</h3>
-                    <p>包括面向对象、模板、STL标准库、智能指针、内存管理、多线程编程等关键知识点。深入理解RAII、移动语义、完美转发等现代C++特性。</p>
+                    <h3><i class="fab fa-react" style="margin-right: 8px;"></i>React生态</h3>
+                    <p>React组件、JSX语法、状态管理（Redux、Context API）、React Hooks、React Router等。掌握Next.js等React全栈框架。</p>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-memory" style="margin-right: 8px;"></i>内存管理</h3>
-                    <p>堆栈内存分配、智能指针（shared_ptr、unique_ptr、weak_ptr）、内存泄漏检测与预防。</p>
+                    <h3><i class="fab fa-vuejs" style="margin-right: 8px;"></i>Vue.js</h3>
+                    <p>Vue组件系统、响应式原理、Vuex状态管理、Vue Router、组合式API等。了解Nuxt.js等Vue生态工具。</p>
                 </div>
-                <p>C++八股文覆盖了从基础语法到高级特性的各个方面，尤其注重内存管理和性能优化相关内容。</p>
+                <div class="card">
+                    <h3><i class="fas fa-angular" style="margin-right: 8px;"></i>其他框架</h3>
+                    <p>Angular、Svelte、Solid.js等现代前端框架的特点和使用场景对比。</p>
+                </div>
+                <p>现代前端开发离不开框架的支持，选择合适的框架能够大大提升开发效率。</p>
             </section>
             
-            <!-- Java个人项目部分 -->
-            <section id="java-projects" class="section">
-                <h2><i class="fab fa-java" style="margin-right: 12px;"></i>Java个人项目</h2>
-                <p>这里展示使用Java语言开发的个人项目，包括项目介绍、技术栈和实现细节。</p>
+            <!-- 开发工具部分 -->
+            <section id="tools" class="section">
+                <h2><i class="fas fa-tools" style="margin-right: 12px;"></i>开发工具</h2>
                 <div class="card">
-                    <h3><i class="fas fa-project-diagram" style="margin-right: 8px;"></i>Spring Boot微服务</h3>
-                    <p>基于Spring Boot、Spring Cloud构建的微服务架构项目，包含用户管理、订单系统、支付网关等模块。</p>
+                    <h3><i class="fas fa-box" style="margin-right: 8px;"></i>构建工具</h3>
+                    <p>Webpack、Vite、Rollup等模块打包工具的配置和优化。掌握代码分割、懒加载、Tree Shaking等性能优化技术。</p>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-desktop" style="margin-right: 8px;"></i>桌面应用程序</h3>
-                    <p>使用Java Swing或JavaFX开发的桌面应用，如文件管理器、图像处理工具等。</p>
+                    <h3><i class="fas fa-check-circle" style="margin-right: 8px;"></i>代码质量</h3>
+                    <p>ESLint、Prettier代码规范工具，Jest、Cypress等测试框架，TypeScript类型检查等质量保证工具。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-rocket" style="margin-right: 8px;"></i>部署与监控</h3>
+                    <p>CI/CD流程、Docker容器化、CDN部署、性能监控、错误追踪等DevOps相关技能。</p>
+                </div>
+                <p>掌握现代化的开发工具链是提升开发效率和代码质量的关键。</p>
+            </section>
+            
+            <!-- React项目部分 -->
+            <section id="react-projects" class="section">
+                <h2><i class="fab fa-react" style="margin-right: 12px;"></i>React项目</h2>
+                <p>这里展示使用React技术栈开发的个人项目，包括项目介绍、技术栈和实现细节。</p>
+                <div class="card">
+                    <h3><i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>电商平台</h3>
+                    <p>基于React + Redux + React Router构建的全功能电商平台，包含商品展示、购物车、订单管理、用户系统等功能模块。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-bar" style="margin-right: 8px;"></i>数据可视化平台</h3>
+                    <p>使用React + D3.js + Chart.js开发的数据分析平台，支持多种图表类型和实时数据更新。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-comments" style="margin-right: 8px;"></i>实时聊天应用</h3>
+                    <p>基于React + Socket.io的实时聊天系统，支持群聊、私聊、文件传输等功能。</p>
                 </div>
             </section>
             
-            <!-- C++个人项目部分 -->
-            <section id="cpp-projects" class="section">
-                <h2><i class="fas fa-code" style="margin-right: 12px;"></i>C++个人项目</h2>
-                <p>这里展示使用C++语言开发的个人项目，包括系统级应用、高性能计算程序等。</p>
+            <!-- Vue项目部分 -->
+            <section id="vue-projects" class="section">
+                <h2><i class="fab fa-vuejs" style="margin-right: 12px;"></i>Vue项目</h2>
+                <p>这里展示使用Vue.js技术栈开发的个人项目，展现Vue生态的强大能力。</p>
                 <div class="card">
-                    <h3><i class="fas fa-microchip" style="margin-right: 8px;"></i>高性能计算</h3>
-                    <p>基于C++开发的并行计算程序，利用OpenMP、CUDA等技术进行性能优化。</p>
+                    <h3><i class="fas fa-tasks" style="margin-right: 8px;"></i>项目管理系统</h3>
+                    <p>基于Vue 3 + Vuex + Vue Router的企业级项目管理平台，包含任务分配、进度跟踪、团队协作等功能。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-blog" style="margin-right: 8px;"></i>个人博客系统</h3>
+                    <p>使用Vue + Nuxt.js开发的SSR博客平台，支持Markdown编辑、评论系统、SEO优化等特性。</p>
                 </div>
             </section>
             
-            <!-- Go个人项目部分 -->
-            <section id="go-projects" class="section">
-                <h2><i class="fab fa-golang" style="margin-right: 12px;"></i>Go个人项目</h2>
-                <p>这里展示使用Go语言开发的个人项目，包括微服务、命令行工具、云原生应用等。</p>
+            <!-- 原生JS项目部分 -->
+            <section id="vanilla-projects" class="section">
+                <h2><i class="fas fa-code" style="margin-right: 12px;"></i>原生JS项目</h2>
+                <p>这里展示使用原生JavaScript开发的项目，体现扎实的JavaScript基础功底。</p>
                 <div class="card">
-                    <h3><i class="fas fa-cloud" style="margin-right: 8px;"></i>云原生应用</h3>
-                    <p>基于Go语言开发的容器化微服务，部署在Kubernetes集群中，具备高可用和自动扩缩容能力。</p>
+                    <h3><i class="fas fa-gamepad" style="margin-right: 8px;"></i>HTML5游戏</h3>
+                    <p>使用Canvas API和原生JavaScript开发的2D游戏，包含碰撞检测、动画效果、音效等游戏机制。</p>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-terminal" style="margin-right: 8px;"></i>命令行工具</h3>
-                    <p>开发的各种CLI工具，如文件处理器、API测试工具、系统监控工具等。</p>
+                    <h3><i class="fas fa-calculator" style="margin-right: 8px;"></i>Web应用工具</h3>
+                    <p>原生JavaScript开发的实用工具集合，如计算器、待办事项、天气查询等小应用。</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-paint-brush" style="margin-right: 8px;"></i>交互式动画</h3>
+                    <p>基于CSS3和JavaScript的创意动画效果，展示前端动画技术的无限可能。</p>
                 </div>
             </section>
         </main>
