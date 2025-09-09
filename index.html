@@ -268,16 +268,151 @@
             perspective: 800px;
         }
         
-        /* 地球仪GIF样式 */
+        /* 地球仪GIF样式 - 镜头效果 */
         .globe-gif {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6), 
-                        inset 0 0 50px rgba(0, 0, 0, 0.8);
+            border: 8px solid #2c3e50;
+            box-shadow: 
+                /* 外层镜头边框阴影 */
+                0 0 0 4px #34495e,
+                0 0 0 8px #1a252f,
+                0 0 0 12px #0f1419,
+                /* 镜头反光效果 */
+                inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+                inset 20px 20px 40px rgba(255, 255, 255, 0.1),
+                /* 外部光晕 */
+                0 0 40px rgba(0, 240, 255, 0.3),
+                0 0 80px rgba(0, 240, 255, 0.1);
+            position: relative;
             animation: globePulse 5s ease-in-out infinite;
+        }
+        
+        /* 镜头装饰环 */
+        .globe-gif::before {
+            content: '';
+            position: absolute;
+            top: -16px;
+            left: -16px;
+            right: -16px;
+            bottom: -16px;
+            border-radius: 50%;
+            border: 2px solid #4a6741;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(0, 240, 255, 0.2) 45deg,
+                transparent 90deg,
+                rgba(0, 240, 255, 0.2) 135deg,
+                transparent 180deg,
+                rgba(0, 240, 255, 0.2) 225deg,
+                transparent 270deg,
+                rgba(0, 240, 255, 0.2) 315deg,
+                transparent 360deg
+            );
+            animation: lensRotate 8s linear infinite;
+            z-index: -1;
+        }
+        
+        /* 镜头反光条纹 */
+        .globe-gif::after {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 25%;
+            height: 8%;
+            background: linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.4) 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 100%);
+            border-radius: 50px;
+            transform: rotate(-30deg);
+            animation: lensFlare 6s ease-in-out infinite;
+        }</search>
+</use_search_and_replace>
+
+现在我需要添加镜头旋转和反光闪烁的动画效果：
+
+<use_search_and_replace>
+<path>index.html</path>
+<search>        @keyframes globePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 0 4px #34495e,
+                    0 0 0 8px #1a252f,
+                    0 0 0 12px #0f1419,
+                    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.1),
+                    0 0 40px rgba(0, 240, 255, 0.3),
+                    0 0 80px rgba(0, 240, 255, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 0 4px #34495e,
+                    0 0 0 8px #1a252f,
+                    0 0 0 12px #0f1419,
+                    inset -20px -20px 40px rgba(0, 0, 0, 0.8),
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.2),
+                    0 0 50px rgba(0, 240, 255, 0.5),
+                    0 0 100px rgba(0, 240, 255, 0.2);
+            }
+        }
+        
+        @keyframes lensRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes lensFlare {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: rotate(-30deg) scale(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: rotate(-30deg) scale(1.2);
+            }
+        }</search>
+<replace>        @keyframes globePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 0 4px #34495e,
+                    0 0 0 8px #1a252f,
+                    0 0 0 12px #0f1419,
+                    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.1),
+                    0 0 40px rgba(0, 240, 255, 0.3),
+                    0 0 80px rgba(0, 240, 255, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 0 4px #34495e,
+                    0 0 0 8px #1a252f,
+                    0 0 0 12px #0f1419,
+                    inset -20px -20px 40px rgba(0, 0, 0, 0.8),
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.2),
+                    0 0 50px rgba(0, 240, 255, 0.5),
+                    0 0 100px rgba(0, 240, 255, 0.2);
+            }
+        }
+        
+        @keyframes lensRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes lensFlare {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: rotate(-30deg) scale(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: rotate(-30deg) scale(1.2);
+            }
         }
         
         /* 链接组件样式 - 保留原有图标和样式 */
@@ -347,8 +482,42 @@
         
         /* 动画定义 */
         @keyframes globePulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.6), inset 0 0 50px rgba(0, 0, 0, 0.8); }
-            50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.8); }
+            0%, 100% { 
+                box-shadow: 
+                    0 0 0 4px #34495e,
+                    0 0 0 8px #1a252f,
+                    0 0 0 12px #0f1419,
+                    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.1),
+                    0 0 40px rgba(0, 240, 255, 0.3),
+                    0 0 80px rgba(0, 240, 255, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 0 4px #34495e,
+                    0 0 0 8px #1a252f,
+                    0 0 0 12px #0f1419,
+                    inset -20px -20px 40px rgba(0, 0, 0, 0.8),
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.2),
+                    0 0 50px rgba(0, 240, 255, 0.5),
+                    0 0 100px rgba(0, 240, 255, 0.2);
+            }
+        }
+        
+        @keyframes lensRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes lensFlare {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: rotate(-30deg) scale(1);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: rotate(-30deg) scale(1.2);
+            }
         }
         
         @keyframes fadeIn {
