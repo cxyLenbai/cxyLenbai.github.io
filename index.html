@@ -3,82 +3,630 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cxyLenbai 的个人网站</title>
+    <title>cxyLenbai 的科技个人网站</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* 全局样式重置与基础设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #00f0ff;
+            --secondary: #9d4edd;
+            --dark: #0d1b2a;
+            --light: #e0e1dd;
+            --glow: 0 0 15px rgba(0, 240, 255, 0.7);
+            --glow-secondary: 0 0 15px rgba(157, 78, 221, 0.7);
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
+            color: var(--light);
         }
-        .avatar {
-            display: block;
-            width: 120px;
-            height: 120px;
+        
+        /* 网格背景 */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 30s linear infinite;
+        }
+        
+        /* 粒子和光晕效果 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .hologram-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            margin: 0 auto 20px;
-            object-fit: cover;
+            background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(0,240,255,0) 70%);
+            z-index: 1;
+            filter: blur(50px);
+            animation: pulse 8s infinite ease-in-out;
         }
-        .name {
+        
+        /* 机器人元素 */
+        .robot-container {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            z-index: 2;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .robot {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .robot-head {
+            width: 60px;
+            height: 60px;
+            background: var(--dark);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: var(--glow);
+        }
+        
+        .robot-eye {
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+            box-shadow: var(--glow);
+            animation: blink 4s infinite;
+        }
+        
+        .robot-eye.left {
+            left: 15px;
+        }
+        
+        .robot-eye.right {
+            right: 15px;
+        }
+        
+        .robot-body {
+            width: 80px;
+            height: 100px;
+            background: var(--dark);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: var(--glow);
+        }
+        
+        .robot-arm {
+            width: 40px;
+            height: 10px;
+            background: var(--primary);
+            position: absolute;
+            top: 30px;
+            box-shadow: var(--glow);
+        }
+        
+        .robot-arm.left {
+            left: -40px;
+            animation: armMoveLeft 3s infinite ease-in-out;
+        }
+        
+        .robot-arm.right {
+            right: -40px;
+            animation: armMoveRight 3s infinite ease-in-out;
+        }
+        
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 3;
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 30px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1.5s ease-out;
         }
+        
+        /* 头像样式 */
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            perspective: 1000px;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: var(--glow);
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            animation: rotateSlow 20s linear infinite;
+        }
+        
+        .avatar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px dashed var(--secondary);
+            box-shadow: var(--glow-secondary);
+            animation: rotateReverse 15s linear infinite;
+        }
+        
+        .avatar-container:hover .avatar {
+            transform: scale(1.05) rotateY(10deg);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+        }
+        
+        /* 名字样式 */
+        .name {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: var(--glow);
+            position: relative;
+        }
+        
+        .name::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            box-shadow: var(--glow);
+            animation: lineGrow 2s forwards;
+        }
+        
+        .title {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+        
+        /* 链接组件样式 */
         .components {
             list-style: none;
             padding: 0;
+            margin-top: 20px;
         }
+        
         .components li {
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            perspective: 1000px;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
         }
+        
+        .components li:nth-child(1) { animation-delay: 0.7s; }
+        .components li:nth-child(2) { animation-delay: 0.9s; }
+        .components li:nth-child(3) { animation-delay: 1.1s; }
+        .components li:nth-child(4) { animation-delay: 1.3s; }
+        
+        .component-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 18px;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .component-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .component-card:hover::before {
+            left: 100%;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: var(--glow);
+            border-color: var(--primary);
+            background: rgba(15, 32, 39, 0.3);
+        }
+        
         .components a {
-            color: #3498db;
+            color: var(--light);
             text-decoration: none;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             transition: color 0.3s;
         }
+        
         .components a:hover {
-            color: #2980b9;
-            text-decoration: underline;
+            color: var(--primary);
         }
-        .component-title {
-            font-weight: bold;
+        
+        .component-icon {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .component-card:hover .component-icon {
+            transform: scale(1.3) rotate(10deg);
+        }
+        
+        /* 技能指示器 */
+        .skills-indicator {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            animation: fadeInUp 1s ease 1.5s forwards;
+            opacity: 0;
+        }
+        
+        .skills-title {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .skills-chart-container {
+            width: 100%;
+            height: 120px;
+            position: relative;
+        }
+        
+        /* 动画定义 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 80%; }
+        }
+        
+        @keyframes rotateSlow {
+            from { transform: rotateY(0); }
+            to { transform: rotateY(360deg); }
+        }
+        
+        @keyframes rotateReverse {
+            from { transform: rotateY(0); }
+            to { transform: rotateY(-360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes blink {
+            0%, 10%, 90%, 100% { transform: scale(1); }
+            5% { transform: scale(0.1); }
+        }
+        
+        @keyframes armMoveLeft {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-20deg) translateX(-10px); }
+        }
+        
+        @keyframes armMoveRight {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(20deg) translateX(10px); }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .robot-container {
+                width: 150px;
+                height: 150px;
+                top: 5%;
+                right: 5%;
+            }
+            
+            .name {
+                font-size: 28px;
+            }
+            
+            .hologram-glow {
+                width: 400px;
+                height: 400px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 第一行：头像 -->
-    <img src="headerImage.png" alt="cxyLenbai 的头像" class="avatar">
+    <!-- 背景元素 -->
+    <div class="grid-bg"></div>
+    <div id="particles-js"></div>
+    <div class="hologram-glow"></div>
     
-    <!-- 第二行：名字 -->
-    <div class="name">cxyLenbai</div>
+    <!-- 机器人元素 -->
+    <div class="robot-container">
+        <div class="robot">
+            <div class="robot-head">
+                <div class="robot-eye left"></div>
+                <div class="robot-eye right"></div>
+            </div>
+            <div class="robot-body">
+                <div class="robot-arm left"></div>
+                <div class="robot-arm right"></div>
+            </div>
+        </div>
+    </div>
     
-    <!-- 第三行：四个组件链接 -->
-    <ul class="components">
-        <li>
-            <a href="front-end.html">
-                <span class="component-title">前端</span>
-            </a>
-        </li>
-        <li>
-            <a href="back-end.html">
-                <span class="component-title">后端</span>
-            </a>
-        </li>
-        <li>
-            <a href="algorithm.html">
-                <span class="component-title">算法</span>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/cxyLenbai?tab=repositories" target="_blank">
-                <span class="component-title">Github主页</span>
-            </a>
-        </li>
-    </ul>
+    <!-- 主内容容器 -->
+    <div class="container">
+        <!-- 头像区域 -->
+        <div class="avatar-container">
+            <img src="headerImage.png" alt="cxyLenbai 的头像" class="avatar">
+            <div class="avatar-overlay"></div>
+        </div>
+        
+        <!-- 名字和标题 -->
+        <div class="name">cxyLenbai</div>
+        <div class="title">全栈开发者 & 算法爱好者</div>
+        
+        <!-- 链接组件 -->
+        <ul class="components">
+            <li>
+                <div class="component-card">
+                    <a href="front-end.html">
+                        <i class="fas fa-code component-icon"></i>
+                        <span class="component-title">前端</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="component-card">
+                    <a href="back-end.html">
+                        <i class="fas fa-server component-icon"></i>
+                        <span class="component-title">后端</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="component-card">
+                    <a href="algorithm.html">
+                        <i class="fas fa-cogs component-icon"></i>
+                        <span class="component-title">算法</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="component-card">
+                    <a href="https://github.com/cxyLenbai?tab=repositories" target="_blank">
+                        <i class="fab fa-github component-icon"></i>
+                        <span class="component-title">Github主页</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        
+        <!-- 技能指示器 -->
+        <div class="skills-indicator">
+            <div class="skills-title">技能熟练度</div>
+            <div class="skills-chart-container">
+                <canvas id="skillsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 粒子动画和交互脚本 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 粒子动画配置
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#00f0ff", "#9d4edd"]
+                },
+                "shape": {
+                    "type": ["circle", "polygon"],
+                    "polygon": {
+                        "nb_sides": 4
+                    }
+                },
+                "opacity": {
+                    "value": 0.6,
+                    "random": true
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f0ff",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.8
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 6
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+        
+        // 技能图表
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['前端', '后端', '算法', '数据库', 'DevOps'],
+                datasets: [{
+                    label: '技能熟练度',
+                    data: [85, 75, 80, 70, 60],
+                    backgroundColor: 'rgba(0, 240, 255, 0.1)',
+                    borderColor: 'rgba(0, 240, 255, 0.8)',
+                    pointBackgroundColor: 'rgba(0, 240, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(0, 240, 255, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        },
+                        ticks: {
+                            backdropColor: 'transparent',
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // 添加鼠标移动效果
+        document.addEventListener('mousemove', (e) => {
+            const robot = document.querySelector('.robot-container');
+            if (robot) {
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+                robot.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
