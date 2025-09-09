@@ -23,7 +23,6 @@
             --light: #e0e1dd;
             --glow: 0 0 15px rgba(0, 240, 255, 0.7);
             --glow-secondary: 0 0 15px rgba(157, 78, 221, 0.7);
-            --bg-overlay: rgba(13, 27, 42, 0.7); /* 背景覆盖层透明度 */
         }
         
         body {
@@ -35,43 +34,22 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
             color: var(--light);
         }
         
-        /* 城市动态背景 */
-        .city-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            object-fit: cover; /* 确保GIF覆盖整个背景 */
-        }
-        
-        /* 背景覆盖层 - 增强文字可读性 */
-        .bg-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(27, 38, 59, 0.8), rgba(65, 90, 119, 0.7));
-            z-index: 1;
-        }
-        
-        /* 超链接样式修改 */
+        /* 超链接样式修改 - 核心修改 */
         a {
-            color: white !important;
-            text-decoration: none !important;
+            color: white !important; /* 强制设置为白色 */
+            text-decoration: none !important; /* 移除下划线 */
         }
         
         a:hover, a:focus {
-            color: var(--primary) !important;
-            text-decoration: none !important;
+            color: var(--primary) !important; /* 保持hover效果为主题色 */
+            text-decoration: none !important; /* 确保hover时也没有下划线 */
         }
         
-        /* 网格背景 - 保留但降低透明度 */
+        /* 网格背景 */
         .grid-bg {
             position: absolute;
             top: 0;
@@ -79,10 +57,10 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
-            z-index: 2;
+            z-index: 0;
             animation: gridMove 30s linear infinite;
         }
         
@@ -93,7 +71,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 3;
+            z-index: 1;
         }
         
         .hologram-glow {
@@ -102,7 +80,7 @@
             height: 600px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(0,240,255,0) 70%);
-            z-index: 4;
+            z-index: 1;
             filter: blur(50px);
             animation: pulse 8s infinite ease-in-out;
         }
@@ -114,7 +92,7 @@
             right: 10%;
             width: 200px;
             height: 200px;
-            z-index: 5;
+            z-index: 2;
             opacity: 0.7;
             animation: float 6s ease-in-out infinite;
         }
@@ -189,10 +167,10 @@
             animation: armMoveRight 3s infinite ease-in-out;
         }
         
-        /* 主容器 - 提高z-index确保内容可见 */
+        /* 主容器 */
         .container {
             position: relative;
-            z-index: 10;
+            z-index: 3;
             text-align: center;
             padding: 20px;
             max-width: 1200px;
@@ -282,40 +260,27 @@
             width: 220px;
         }
         
-        /* 中间数字大脑容器 */
-        .brain-container {
+        /* 中间地球仪容器 */
+        .globe-container {
             position: relative;
             width: 200px;
             height: 200px;
-            perspective: 1000px;
+            perspective: 800px;
         }
         
-        /* 数字大脑样式 */
-        .digital-brain {
+        /* 地球仪GIF样式 */
+        .globe-gif {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--secondary);
-            box-shadow: 0 0 30px rgba(157, 78, 221, 0.6), 
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6), 
                         inset 0 0 50px rgba(0, 0, 0, 0.8);
-            animation: brainRotate 15s linear infinite, brainPulse 5s ease-in-out infinite;
+            animation: globePulse 5s ease-in-out infinite;
         }
         
-        /* 大脑周围的数字流效果 */
-        .brain-digits {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            overflow: hidden;
-            z-index: 1;
-            opacity: 0.7;
-        }
-        
-        /* 链接组件样式 */
+        /* 链接组件样式 - 保留原有图标和样式 */
         .component-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -381,14 +346,9 @@
         }
         
         /* 动画定义 */
-        @keyframes brainRotate {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-        
-        @keyframes brainPulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(157, 78, 221, 0.6), inset 0 0 50px rgba(0, 0, 0, 0.8); }
-            50% { box-shadow: 0 0 40px rgba(157, 78, 221, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.8); }
+        @keyframes globePulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.6), inset 0 0 50px rgba(0, 0, 0, 0.8); }
+            50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.8), inset 0 0 50px rgba(0, 0, 0, 0.8); }
         }
         
         @keyframes fadeIn {
@@ -477,11 +437,7 @@
     </style>
 </head>
 <body>
-    <!-- 城市动态背景 -->
-    <img src="城市.gif" alt="未来城市夜景动态背景" class="city-bg">
-    <div class="bg-overlay"></div>
-    
-    <!-- 原有背景元素调整层级 -->
+    <!-- 背景元素 -->
     <div class="grid-bg"></div>
     <div id="particles-js"></div>
     <div class="hologram-glow"></div>
@@ -504,7 +460,7 @@
     <div class="container">
         <!-- 头像区域 -->
         <div class="avatar-container">
-            <img src="https://picsum.photos/200/200" alt="个人头像" class="avatar">
+            <img src="headerImage.png" alt="个人头像" class="avatar">
             <div class="avatar-overlay"></div>
         </div>
         
@@ -530,12 +486,9 @@
                 </div>
             </div>
             
-            <!-- 中间旋转的数字大脑 -->
-            <div class="brain-container">
-                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/e1cba30c6c7e46488340d65750d8f12c.jpg~tplv-a9rns2rl98-24:720:720.image?rk3s=1fb89129&x-expires=1757998311&x-signature=3vfUW0V%2BidOFRUpQvju%2BQ2moBA8%3D" 
-                     alt="旋转的数字大脑" 
-                     class="digital-brain">
-                <div class="brain-digits"></div>
+            <!-- 中间地球仪GIF -->
+            <div class="globe-container">
+                <img src="地球仪.gif" alt="旋转的地球仪动画" class="globe-gif">
             </div>
             
             <!-- 右侧标签组 -->
@@ -643,30 +596,6 @@
             },
             "retina_detect": true
         });
-        
-        // 创建数字流效果
-        function createBrainDigits() {
-            const digitsContainer = document.querySelector('.brain-digits');
-            if (!digitsContainer) return;
-            
-            // 创建100个随机数字元素
-            for (let i = 0; i < 100; i++) {
-                const digit = document.createElement('div');
-                digit.textContent = Math.floor(Math.random() * 10);
-                digit.style.position = 'absolute';
-                digit.style.color = 'rgba(157, 78, 221, 0.5)';
-                digit.style.fontSize = `${5 + Math.random() * 10}px`;
-                digit.style.top = `${Math.random() * 100}%`;
-                digit.style.left = `${Math.random() * 100}%`;
-                digit.style.transform = `translate(-50%, -50%)`;
-                digit.style.animation = `float ${3 + Math.random() * 7}s infinite ease-in-out`;
-                digit.style.animationDelay = `${Math.random() * 5}s`;
-                digitsContainer.appendChild(digit);
-            }
-        }
-        
-        // 页面加载完成后创建数字流效果
-        window.addEventListener('load', createBrainDigits);
         
         // 鼠标移动交互效果
         document.addEventListener('mousemove', (e) => {
