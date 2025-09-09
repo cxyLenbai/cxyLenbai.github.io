@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>未来已来</title>
+    <title>未来已来 - cxyLenbai</title>
     <!-- 引入外部资源 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         /* 全局样式重置与基础设置 */
@@ -19,14 +20,19 @@
         :root {
             --primary: #00f0ff;
             --secondary: #9d4edd;
+            --accent: #ff0080;
+            --warning: #ffaa00;
+            --success: #00ff88;
             --dark: #0d1b2a;
             --light: #e0e1dd;
-            --glow: 0 0 15px rgba(0, 240, 255, 0.7);
-            --glow-secondary: 0 0 15px rgba(157, 78, 221, 0.7);
+            --glow: 0 0 20px rgba(0, 240, 255, 0.8);
+            --glow-secondary: 0 0 20px rgba(157, 78, 221, 0.8);
+            --glow-accent: 0 0 20px rgba(255, 0, 128, 0.8);
+            --matrix-green: #00ff41;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
             overflow: hidden;
             height: 100vh;
             display: flex;
@@ -35,91 +41,79 @@
             justify-content: center;
             position: relative;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
-                linear-gradient(135deg, #000000, #0a0a0a, #1a0033, #000a1a);
+                radial-gradient(circle at 15% 85%, rgba(0, 240, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 15%, rgba(157, 78, 221, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 25% 25%, rgba(0, 255, 65, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #000000, #0a0a0a, #1a0033, #000a1a, #001122);
             color: var(--light);
         }
         
-        /* 超链接样式修改 - 核心修改 */
+        /* 超链接样式 */
         a {
-            color: white !important; /* 强制设置为白色 */
-            text-decoration: none !important; /* 移除下划线 */
+            color: white !important;
+            text-decoration: none !important;
         }
         
         a:hover, a:focus {
-            color: var(--primary) !important; /* 保持hover效果为主题色 */
-            text-decoration: none !important; /* 确保hover时也没有下划线 */
+            color: var(--primary) !important;
+            text-decoration: none !important;
         }
         
-        /* 数字雨背景层 - 黑客帝国风格 */
+        /* 增强的赛博朋克背景层 */
         .grid-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-/*             background-image: 
-                /* 六边形网格 */
-                radial-gradient(circle at 25px 25px, rgba(0, 240, 255, 0.2) 2px, transparent 2px),
-                /* 扫描线 */
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(0, 240, 255, 0.3) 2px, transparent 2px),
                 repeating-linear-gradient(
                     0deg,
                     transparent,
                     transparent 2px,
-                    rgba(0, 240, 255, 0.03) 2px,
-                    rgba(0, 240, 255, 0.03) 4px
+                    rgba(0, 240, 255, 0.05) 2px,
+                    rgba(0, 240, 255, 0.05) 4px
                 ),
-                /* 电路板纹理 */
                 linear-gradient(90deg, 
                     transparent 24%, 
-                    rgba(0, 240, 255, 0.05) 25%, 
-                    rgba(0, 240, 255, 0.05) 26%, 
+                    rgba(0, 240, 255, 0.08) 25%, 
+                    rgba(0, 240, 255, 0.08) 26%, 
                     transparent 27%, 
                     transparent 74%, 
-                    rgba(255, 0, 150, 0.05) 75%, 
-                    rgba(255, 0, 150, 0.05) 76%, 
+                    rgba(255, 0, 150, 0.08) 75%, 
+                    rgba(255, 0, 150, 0.08) 76%, 
                     transparent 77%
                 );
-            background-size: 50px 50px, 4px 4px, 100px 100px; */
-            background: #000;
+            background-size: 50px 50px, 4px 4px, 100px 100px;
             z-index: 0;
-/*             animation: cyberMove 20s linear infinite; */
+            animation: cyberMove 20s linear infinite;
+        }
+        
+        /* 数字雨效果 */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
             overflow: hidden;
         }
         
-/*         /* 数字雨效果 */
-        .grid-bg::before {
-            content: '';
+        .matrix-column {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 98px,
-                    rgba(0, 255, 0, 0.03) 100px
-                );
-            animation: digitalRain 15s linear infinite;
+            top: -100%;
+            color: var(--matrix-green);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 14px;
+            animation: matrixFall linear infinite;
+            text-shadow: 0 0 5px var(--matrix-green);
+            opacity: 0.8;
         }
-        
-        /* 全息投影效果 */
-        .grid-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at top, rgba(0, 240, 255, 0.1) 0%, transparent 70%),
-                radial-gradient(ellipse at bottom, rgba(255, 0, 150, 0.1) 0%, transparent 70%);
-            animation: hologramFlicker 8s ease-in-out infinite;
-        } */
         
         /* 粒子和光晕效果 */
         #particles-js {
@@ -133,13 +127,35 @@
         
         .hologram-glow {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 800px;
+            height: 800px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(0,240,255,0) 70%);
+            background: radial-gradient(circle, rgba(0,240,255,0.15) 0%, rgba(0,240,255,0) 70%);
             z-index: 1;
-            filter: blur(50px);
-            animation: pulse 8s infinite ease-in-out;
+            filter: blur(60px);
+            animation: pulse 10s infinite ease-in-out;
+        }
+        
+        /* 多层光晕效果 */
+        .hologram-glow::before {
+            content: '';
+            position: absolute;
+            top: -25%;
+            left: -25%;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(
+                from 0deg,
+                rgba(0, 240, 255, 0.2),
+                rgba(255, 0, 150, 0.2),
+                rgba(157, 78, 221, 0.2),
+                rgba(0, 255, 65, 0.2),
+                rgba(255, 170, 0, 0.2),
+                rgba(0, 240, 255, 0.2)
+            );
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: colorShift 15s ease-in-out infinite;
         }
         
         /* 赛博朋克扫描线 */
@@ -153,15 +169,15 @@
                 0deg,
                 transparent,
                 transparent 2px,
-                rgba(0, 240, 255, 0.02) 2px,
-                rgba(0, 240, 255, 0.02) 4px
+                rgba(0, 240, 255, 0.03) 2px,
+                rgba(0, 240, 255, 0.03) 4px
             );
             z-index: 2;
             animation: scanlines 0.1s linear infinite;
             pointer-events: none;
         }
         
-        /* 数据流效果 */
+        /* 增强数据流效果 */
         .data-stream {
             position: absolute;
             top: 0;
@@ -171,139 +187,121 @@
             background-image: 
                 linear-gradient(90deg, 
                     transparent 0%, 
-                    rgba(0, 255, 0, 0.1) 25%, 
-                    transparent 50%, 
-                    rgba(0, 240, 255, 0.1) 75%, 
-                    transparent 100%
+                    rgba(0, 255, 65, 0.15) 20%, 
+                    transparent 40%, 
+                    rgba(0, 240, 255, 0.15) 60%, 
+                    transparent 80%, 
+                    rgba(255, 0, 150, 0.15) 100%
                 );
-            background-size: 200px 100%;
+            background-size: 300px 100%;
             z-index: 1;
-            animation: dataFlow 8s linear infinite;
+            animation: dataFlow 12s linear infinite;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.4;
         }
         
-        /* 增强全息光晕效果 */
-        .hologram-glow::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                rgba(0, 240, 255, 0.1),
-                rgba(255, 0, 150, 0.1),
-                rgba(128, 0, 255, 0.1),
-                rgba(0, 255, 128, 0.1),
-                rgba(0, 240, 255, 0.1)
-            );
-            border-radius: 50%;
-            filter: blur(100px);
-            animation: colorShift 12s ease-in-out infinite;
-        }
-        
-        /* 机器人元素 */
+        /* 机器人元素增强 */
         .robot-container {
             position: absolute;
-            top: 10%;
-            right: 10%;
-            width: 200px;
-            height: 200px;
+            top: 8%;
+            right: 8%;
+            width: 220px;
+            height: 220px;
             z-index: 2;
-            opacity: 0.7;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0.8;
+            animation: float 8s ease-in-out infinite;
         }
         
         .robot {
             width: 100%;
             height: 100%;
             position: relative;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
         }
         
         .robot-head {
-            width: 60px;
-            height: 60px;
-            background: var(--dark);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--dark), #1a2332);
+            border: 3px solid var(--primary);
+            border-radius: 12px;
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: var(--glow);
+            box-shadow: var(--glow), inset 0 0 10px rgba(0, 240, 255, 0.2);
         }
         
         .robot-eye {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--primary);
             border-radius: 50%;
             position: absolute;
-            top: 25px;
+            top: 28px;
             box-shadow: var(--glow);
-            animation: blink 4s infinite;
+            animation: blink 5s infinite;
         }
         
         .robot-eye.left {
-            left: 15px;
+            left: 18px;
         }
         
         .robot-eye.right {
-            right: 15px;
+            right: 18px;
         }
         
         .robot-body {
-            width: 80px;
-            height: 100px;
-            background: var(--dark);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
+            width: 90px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--dark), #1a2332);
+            border: 3px solid var(--primary);
+            border-radius: 12px;
             position: absolute;
-            top: 70px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: var(--glow);
+            box-shadow: var(--glow), inset 0 0 15px rgba(0, 240, 255, 0.2);
         }
         
         .robot-arm {
-            width: 40px;
-            height: 10px;
-            background: var(--primary);
+            width: 45px;
+            height: 12px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             position: absolute;
-            top: 30px;
+            top: 35px;
+            border-radius: 6px;
             box-shadow: var(--glow);
         }
         
         .robot-arm.left {
-            left: -40px;
-            animation: armMoveLeft 3s infinite ease-in-out;
+            left: -45px;
+            animation: armMoveLeft 4s infinite ease-in-out;
         }
         
         .robot-arm.right {
-            right: -40px;
-            animation: armMoveRight 3s infinite ease-in-out;
+            right: -45px;
+            animation: armMoveRight 4s infinite ease-in-out;
         }
         
-        /* 主容器 */
+        /* 主容器增强 */
         .container {
             position: relative;
             z-index: 3;
             text-align: center;
             padding: 20px;
-            max-width: 1200px;
+            max-width: 1400px;
             width: 100%;
-            animation: fadeIn 1.5s ease-out;
+            animation: fadeIn 2s ease-out;
         }
         
-        /* 头像区域 */
+        /* 头像区域增强 */
         .avatar-container {
             position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 30px;
-            perspective: 1000px;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 40px;
+            perspective: 1200px;
         }
         
         .avatar {
@@ -311,11 +309,16 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary);
-            box-shadow: var(--glow);
-            transition: all 0.5s ease;
+            border: 4px solid var(--primary);
+            box-shadow: var(--glow), 0 0 40px rgba(0, 240, 255, 0.3);
+            transition: all 0.6s ease;
             transform-style: preserve-3d;
-            animation: rotateSlow 20s linear infinite;
+            animation: rotateSlow 25s linear infinite;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05) rotateY(180deg);
+            box-shadow: var(--glow), 0 0 60px rgba(0, 240, 255, 0.5);
         }
         
         .avatar-overlay {
@@ -325,223 +328,209 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 3px dashed var(--secondary);
+            border: 4px dashed var(--secondary);
             box-shadow: var(--glow-secondary);
-            animation: rotateReverse 15s linear infinite;
+            animation: rotateReverse 20s linear infinite;
         }
         
-        /* 名字样式 */
+        /* 额外的装饰环 */
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: conic-gradient(
+                from 0deg,
+                var(--primary),
+                var(--secondary),
+                var(--accent),
+                var(--success),
+                var(--primary)
+            );
+            background-clip: border-box;
+            mask: radial-gradient(circle, transparent 85px, black 87px);
+            animation: ringRotate 30s linear infinite;
+        }
+        
+        /* 名字样式增强 */
         .name {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-shadow: var(--glow);
+            font-family: 'Orbitron', monospace;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: var(--glow), 0 0 30px rgba(0, 240, 255, 0.5);
             position: relative;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 3s ease-in-out infinite alternate;
         }
         
         .name::after {
             content: "";
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
-            height: 2px;
-            background: var(--primary);
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             box-shadow: var(--glow);
-            animation: lineGrow 2s forwards;
+            animation: lineGrow 2.5s forwards;
         }
         
         .title {
+            font-family: 'Rajdhani', sans-serif;
             color: var(--primary);
-            margin-bottom: 60px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            animation: fadeInUp 1s ease 0.5s forwards;
+            margin-bottom: 70px;
+            font-weight: 400;
+            font-size: 20px;
+            letter-spacing: 2px;
+            animation: fadeInUp 1.5s ease 0.8s forwards;
             opacity: 0;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
         
-        /* 水平分散布局容器 */
+        /* 水平分散布局容器增强 */
         .horizontal-components {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1000px;
-            margin: 0 auto 40px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+        
+        /* 连接线效果 */
+        .horizontal-components::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--primary) 25%,
+                var(--secondary) 50%,
+                var(--accent) 75%,
+                transparent 100%
+            );
+            z-index: -1;
+            opacity: 0.3;
+            animation: connectionPulse 4s ease-in-out infinite;
         }
         
         /* 左侧/右侧标签组 */
         .side-group {
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            width: 220px;
+            gap: 35px;
+            width: 240px;
         }
         
-        /* 中间地球仪容器 */
+        /* 中间地球仪容器增强 */
         .globe-container {
             position: relative;
-            width: 200px;
-            height: 200px;
-            perspective: 800px;
+            width: 220px;
+            height: 220px;
+            perspective: 1000px;
         }
         
-        /* 地球仪GIF样式 - 镜头效果 */
+        /* 地球仪GIF样式 - 增强镜头效果 */
         .globe-gif {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 8px solid #2c3e50;
+            border: 10px solid #2c3e50;
             box-shadow: 
-                /* 外层镜头边框阴影 */
-                0 0 0 4px #34495e,
-                0 0 0 8px #1a252f,
-                0 0 0 12px #0f1419,
-                /* 镜头反光效果 */
-                inset -20px -20px 40px rgba(0, 0, 0, 0.6),
-                inset 20px 20px 40px rgba(255, 255, 255, 0.1),
-                /* 外部光晕 */
-                0 0 40px rgba(0, 240, 255, 0.3),
-                0 0 80px rgba(0, 240, 255, 0.1);
+                0 0 0 5px #34495e,
+                0 0 0 10px #1a252f,
+                0 0 0 15px #0f1419,
+                inset -25px -25px 50px rgba(0, 0, 0, 0.7),
+                inset 25px 25px 50px rgba(255, 255, 255, 0.15),
+                0 0 50px rgba(0, 240, 255, 0.4),
+                0 0 100px rgba(0, 240, 255, 0.2);
             position: relative;
-            animation: globePulse 5s ease-in-out infinite;
+            animation: globePulse 6s ease-in-out infinite;
+            transition: all 0.5s ease;
         }
         
-        /* 镜头装饰环 */
+        .globe-gif:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 0 5px #34495e,
+                0 0 0 10px #1a252f,
+                0 0 0 15px #0f1419,
+                inset -25px -25px 50px rgba(0, 0, 0, 0.8),
+                inset 25px 25px 50px rgba(255, 255, 255, 0.2),
+                0 0 70px rgba(0, 240, 255, 0.6),
+                0 0 140px rgba(0, 240, 255, 0.3);
+        }
+        
+        /* 增强镜头装饰环 */
         .globe-gif::before {
             content: '';
             position: absolute;
-            top: -16px;
-            left: -16px;
-            right: -16px;
-            bottom: -16px;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
             border-radius: 50%;
-            border: 2px solid #4a6741;
+            border: 3px solid transparent;
             background: conic-gradient(
                 from 0deg,
                 transparent 0deg,
-                rgba(0, 240, 255, 0.2) 45deg,
-                transparent 90deg,
-                rgba(0, 240, 255, 0.2) 135deg,
+                rgba(0, 240, 255, 0.4) 30deg,
+                transparent 60deg,
+                rgba(157, 78, 221, 0.4) 90deg,
+                transparent 120deg,
+                rgba(255, 0, 128, 0.4) 150deg,
                 transparent 180deg,
-                rgba(0, 240, 255, 0.2) 225deg,
-                transparent 270deg,
-                rgba(0, 240, 255, 0.2) 315deg,
+                rgba(0, 255, 65, 0.4) 210deg,
+                transparent 240deg,
+                rgba(255, 170, 0, 0.4) 270deg,
+                transparent 300deg,
+                rgba(0, 240, 255, 0.4) 330deg,
                 transparent 360deg
             );
-            animation: lensRotate 8s linear infinite;
+            animation: lensRotate 10s linear infinite;
             z-index: -1;
         }
         
-        /* 镜头反光条纹 */
+        /* 镜头反光条纹增强 */
         .globe-gif::after {
             content: '';
             position: absolute;
-            top: 15%;
-            left: 20%;
-            width: 25%;
-            height: 8%;
+            top: 12%;
+            left: 18%;
+            width: 30%;
+            height: 10%;
             background: linear-gradient(45deg, 
-                rgba(255, 255, 255, 0.4) 0%, 
-                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.6) 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
                 transparent 100%);
             border-radius: 50px;
-            transform: rotate(-30deg);
-            animation: lensFlare 6s ease-in-out infinite;
-        }</search>
-</use_search_and_replace>
-
-现在我需要添加镜头旋转和反光闪烁的动画效果：
-
-<use_search_and_replace>
-<path>index.html</path>
-<search>        @keyframes globePulse {
-            0%, 100% { 
-                box-shadow: 
-                    0 0 0 4px #34495e,
-                    0 0 0 8px #1a252f,
-                    0 0 0 12px #0f1419,
-                    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
-                    inset 20px 20px 40px rgba(255, 255, 255, 0.1),
-                    0 0 40px rgba(0, 240, 255, 0.3),
-                    0 0 80px rgba(0, 240, 255, 0.1);
-            }
-            50% { 
-                box-shadow: 
-                    0 0 0 4px #34495e,
-                    0 0 0 8px #1a252f,
-                    0 0 0 12px #0f1419,
-                    inset -20px -20px 40px rgba(0, 0, 0, 0.8),
-                    inset 20px 20px 40px rgba(255, 255, 255, 0.2),
-                    0 0 50px rgba(0, 240, 255, 0.5),
-                    0 0 100px rgba(0, 240, 255, 0.2);
-            }
+            transform: rotate(-35deg);
+            animation: lensFlare 8s ease-in-out infinite;
         }
         
-        @keyframes lensRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes lensFlare {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: rotate(-30deg) scale(1);
-            }
-            50% { 
-                opacity: 0.8;
-                transform: rotate(-30deg) scale(1.2);
-            }
-        }</search>
-<replace>        @keyframes globePulse {
-            0%, 100% { 
-                box-shadow: 
-                    0 0 0 4px #34495e,
-                    0 0 0 8px #1a252f,
-                    0 0 0 12px #0f1419,
-                    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
-                    inset 20px 20px 40px rgba(255, 255, 255, 0.1),
-                    0 0 40px rgba(0, 240, 255, 0.3),
-                    0 0 80px rgba(0, 240, 255, 0.1);
-            }
-            50% { 
-                box-shadow: 
-                    0 0 0 4px #34495e,
-                    0 0 0 8px #1a252f,
-                    0 0 0 12px #0f1419,
-                    inset -20px -20px 40px rgba(0, 0, 0, 0.8),
-                    inset 20px 20px 40px rgba(255, 255, 255, 0.2),
-                    0 0 50px rgba(0, 240, 255, 0.5),
-                    0 0 100px rgba(0, 240, 255, 0.2);
-            }
-        }
-        
-        @keyframes lensRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes lensFlare {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: rotate(-30deg) scale(1);
-            }
-            50% { 
-                opacity: 0.8;
-                transform: rotate(-30deg) scale(1.2);
-            }
-        }
-        
-        /* 链接组件样式 - 保留原有图标和样式 */
+        /* 链接组件样式增强 */
         .component-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 8px;
-            padding: 18px;
-            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.5s ease;
             transform-style: preserve-3d;
             position: relative;
             overflow: hidden;
@@ -555,8 +544,12 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
-            transition: 0.5s;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 240, 255, 0.2), 
+                rgba(157, 78, 221, 0.2),
+                transparent);
+            transition: 0.6s;
         }
         
         .component-card:hover::before {
@@ -564,90 +557,82 @@
         }
         
         .component-card:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-            box-shadow: var(--glow);
+            transform: translateY(-15px) rotateX(10deg) rotateY(5deg);
+            box-shadow: var(--glow), 0 15px 30px rgba(0, 0, 0, 0.3);
             border-color: var(--primary);
-            background: rgba(15, 32, 39, 0.3);
+            background: rgba(15, 32, 39, 0.4);
         }
         
-        .components a {
+        .component-card a {
             color: var(--light);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: color 0.3s;
+            gap: 12px;
+            transition: all 0.3s;
+            font-family: 'Rajdhani', sans-serif;
         }
         
-        .components a:hover {
+        .component-card:hover a {
             color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
         
         .component-icon {
+            font-size: 24px;
             color: var(--primary);
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .component-card:hover .component-icon {
-            transform: scale(1.3) rotate(10deg);
-        }
-        
-        /* 技能指示器 - 已屏蔽 */
-        .skills-indicator {
-            display: none;
+            transform: scale(1.4) rotate(15deg);
+            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.8));
         }
         
         /* 动画定义 */
-        @keyframes globePulse {
-            0%, 100% { 
-                box-shadow: 
-                    0 0 0 4px #34495e,
-                    0 0 0 8px #1a252f,
-                    0 0 0 12px #0f1419,
-                    inset -20px -20px 40px rgba(0, 0, 0, 0.6),
-                    inset 20px 20px 40px rgba(255, 255, 255, 0.1),
-                    0 0 40px rgba(0, 240, 255, 0.3),
-                    0 0 80px rgba(0, 240, 255, 0.1);
-            }
-            50% { 
-                box-shadow: 
-                    0 0 0 4px #34495e,
-                    0 0 0 8px #1a252f,
-                    0 0 0 12px #0f1419,
-                    inset -20px -20px 40px rgba(0, 0, 0, 0.8),
-                    inset 20px 20px 40px rgba(255, 255, 255, 0.2),
-                    0 0 50px rgba(0, 240, 255, 0.5),
-                    0 0 100px rgba(0, 240, 255, 0.2);
+        @keyframes matrixFall {
+            to {
+                transform: translateY(100vh);
             }
         }
         
-        @keyframes lensRotate {
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: var(--glow), 0 0 30px rgba(0, 240, 255, 0.5);
+            }
+            50% {
+                text-shadow: var(--glow-secondary), 0 0 40px rgba(157, 78, 221, 0.7);
+            }
+        }
+        
+        @keyframes connectionPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scaleX(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scaleX(1.02);
+            }
+        }
+        
+        @keyframes ringRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         
-        @keyframes lensFlare {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: rotate(-30deg) scale(1);
-            }
-            50% { 
-                opacity: 0.8;
-                transform: rotate(-30deg) scale(1.2);
-            }
-        }
-        
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -657,7 +642,7 @@
         
         @keyframes lineGrow {
             from { width: 0; }
-            to { width: 80%; }
+            to { width: 90%; }
         }
         
         @keyframes rotateSlow {
@@ -671,13 +656,47 @@
         }
         
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-<!-- 赛博朋克扫描线效果 -->
-    <div class="cyber-scanlines"></div>
-    
-    <!-- 数据流效果 -->
-    <div class="data-stream"></div>
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 0.9; }
+        }
+        
+        @keyframes globePulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 0 5px #34495e,
+                    0 0 0 10px #1a252f,
+                    0 0 0 15px #0f1419,
+                    inset -25px -25px 50px rgba(0, 0, 0, 0.7),
+                    inset 25px 25px 50px rgba(255, 255, 255, 0.15),
+                    0 0 50px rgba(0, 240, 255, 0.4),
+                    0 0 100px rgba(0, 240, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 0 5px #34495e,
+                    0 0 0 10px #1a252f,
+                    0 0 0 15px #0f1419,
+                    inset -25px -25px 50px rgba(0, 0, 0, 0.9),
+                    inset 25px 25px 50px rgba(255, 255, 255, 0.25),
+                    0 0 70px rgba(0, 240, 255, 0.6),
+                    0 0 140px rgba(0, 240, 255, 0.3);
+            }
+        }
+        
+        @keyframes lensRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes lensFlare {
+            0%, 100% { 
+                opacity: 0.4;
+                transform: rotate(-35deg) scale(1);
+            }
+            50% { 
+                opacity: 0.9;
+                transform: rotate(-35deg) scale(1.3);
+            }
         }
         
         @keyframes cyberMove {
@@ -687,44 +706,11 @@
             }
             50% { 
                 background-position: 25px 25px, 2px 2px, 50px 50px;
-                filter: hue-rotate(90deg);
+                filter: hue-rotate(120deg);
             }
             100% { 
                 background-position: 50px 50px, 4px 4px, 100px 100px;
-                filter: hue-rotate(180deg);
-            }
-        }
-        
-        @keyframes digitalRain {
-            0% { 
-                background-position: 0 -100%;
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% { 
-                background-position: 0 100%;
-                opacity: 1;
-            }
-        }
-        
-        @keyframes hologramFlicker {
-            0%, 100% { 
-                opacity: 0.8;
-                filter: brightness(1) contrast(1);
-            }
-            25% { 
-                opacity: 0.6;
-                filter: brightness(1.2) contrast(1.1);
-            }
-            50% { 
-                opacity: 1;
-                filter: brightness(0.9) contrast(1.2);
-            }
-            75% { 
-                opacity: 0.7;
-                filter: brightness(1.1) contrast(0.9);
+                filter: hue-rotate(240deg);
             }
         }
         
@@ -735,73 +721,95 @@
         
         @keyframes dataFlow {
             0% { 
-                background-position: -200px 0;
-                opacity: 0.2;
+                background-position: -300px 0;
+                opacity: 0.3;
             }
             50% {
-                opacity: 0.5;
+                opacity: 0.8;
             }
             100% { 
-                background-position: calc(100% + 200px) 0;
-                opacity: 0.2;
+                background-position: calc(100% + 300px) 0;
+                opacity: 0.3;
             }
         }
         
         @keyframes colorShift {
             0%, 100% { 
                 transform: rotate(0deg) scale(1);
-                opacity: 0.3;
+                opacity: 0.4;
             }
-            33% { 
-                transform: rotate(120deg) scale(1.1);
+            25% { 
+                transform: rotate(90deg) scale(1.1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: rotate(180deg) scale(0.9);
                 opacity: 0.5;
             }
-            66% { 
-                transform: rotate(240deg) scale(0.9);
-                opacity: 0.4;
+            75% { 
+                transform: rotate(270deg) scale(1.05);
+                opacity: 0.7;
             }
         }
         
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            33% { transform: translateY(-15px) rotate(2deg); }
+            66% { transform: translateY(-25px) rotate(-2deg); }
         }
         
         @keyframes blink {
-            0%, 10%, 90%, 100% { transform: scale(1); }
-            5% { transform: scale(0.1); }
+            0%, 15%, 85%, 100% { transform: scale(1); opacity: 1; }
+            10% { transform: scale(0.1); opacity: 0.3; }
         }
         
         @keyframes armMoveLeft {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-20deg) translateX(-10px); }
+            0%, 100% { transform: rotate(0deg) translateX(0); }
+            50% { transform: rotate(-25deg) translateX(-8px); }
         }
         
         @keyframes armMoveRight {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(20deg) translateX(10px); }
+            0%, 100% { transform: rotate(0deg) translateX(0); }
+            50% { transform: rotate(25deg) translateX(8px); }
         }
         
         /* 响应式调整 */
         @media (max-width: 768px) {
             .horizontal-components {
                 flex-direction: column;
-                gap: 30px;
+                gap: 40px;
             }
             
             .side-group {
                 flex-direction: row;
                 width: 100%;
                 justify-content: center;
+                gap: 20px;
             }
             
             .robot-container {
-                width: 120px;
-                height: 120px;
+                width: 150px;
+                height: 150px;
+                top: 5%;
+                right: 5%;
             }
             
             .name {
-                font-size: 28px;
+                font-size: 32px;
+            }
+            
+            .title {
+                font-size: 16px;
+            }
+            
+            .avatar-container {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .globe-container {
+                width: 180px;
+                height: 180px;
             }
         }
     </style>
@@ -809,8 +817,11 @@
 <body>
     <!-- 背景元素 -->
     <div class="grid-bg"></div>
+    <div class="matrix-rain" id="matrixRain"></div>
     <div id="particles-js"></div>
     <div class="hologram-glow"></div>
+    <div class="cyber-scanlines"></div>
+    <div class="data-stream"></div>
     
     <!-- 机器人元素 -->
     <div class="robot-container">
@@ -877,47 +888,72 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 技能指示器 - 已屏蔽 -->
-        <div class="skills-indicator">
-            <div class="skills-title">技能熟练度</div>
-            <div class="skills-chart-container">
-                <canvas id="skillsChart"></canvas>
-            </div>
-        </div>
     </div>
     
     <!-- 粒子动画和交互脚本 -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 赛博朋克粒子动画配置
+        // 数字雨效果
+        function createMatrixRain() {
+            const matrixContainer = document.getElementById('matrixRain');
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            
+            function createColumn() {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                column.style.animationDelay = Math.random() * 2 + 's';
+                
+                let text = '';
+                for (let i = 0; i < Math.random() * 30 + 15; i++) {
+                    text += characters[Math.floor(Math.random() * characters.length)] + '<br>';
+                }
+                column.innerHTML = text;
+                
+                matrixContainer.appendChild(column);
+                
+                setTimeout(() => {
+                    if (column.parentNode) {
+                        column.parentNode.removeChild(column);
+                    }
+                }, 5000);
+            }
+            
+            setInterval(createColumn, 80);
+        }
+        
+        // 增强的赛博朋克粒子动画配置
         particlesJS("particles-js", {
             "particles": {
                 "number": {
-                    "value": 150,
+                    "value": 200,
                     "density": {
                         "enable": true,
                         "value_area": 1000
                     }
                 },
                 "color": {
-                    "value": ["#00f0ff", "#ff0080", "#8000ff", "#00ff80", "#ff8000"]
+                    "value": ["#00f0ff", "#9d4edd", "#ff0080", "#00ff41", "#ffaa00"]
                 },
                 "shape": {
-                    "type": ["circle", "triangle", "edge"],
+                    "type": ["circle", "triangle", "edge", "star"],
                     "triangle": {
                         "nb_sides": 3
                     },
                     "edge": {
                         "nb_sides": 6
+                    },
+                    "star": {
+                        "nb_sides": 5
                     }
                 },
                 "opacity": {
-                    "value": 0.8,
+                    "value": 0.7,
                     "random": true,
                     "anim": {
                         "enable": true,
-                        "speed": 2,
+                        "speed": 2.5,
                         "opacity_min": 0.1,
                         "sync": false
                     }
@@ -927,21 +963,21 @@
                     "random": true,
                     "anim": {
                         "enable": true,
-                        "speed": 3,
-                        "size_min": 0.5,
+                        "speed": 4,
+                        "size_min": 0.3,
                         "sync": false
                     }
                 },
                 "line_linked": {
                     "enable": true,
-                    "distance": 120,
+                    "distance": 150,
                     "color": "#00f0ff",
-                    "opacity": 0.3,
-                    "width": 1.5
+                    "opacity": 0.4,
+                    "width": 2
                 },
                 "move": {
                     "enable": true,
-                    "speed": 2,
+                    "speed": 2.5,
                     "direction": "none",
                     "random": true,
                     "straight": false,
@@ -949,8 +985,8 @@
                     "bounce": true,
                     "attract": {
                         "enable": true,
-                        "rotateX": 800,
-                        "rotateY": 1600
+                        "rotateX": 1000,
+                        "rotateY": 2000
                     }
                 }
             },
@@ -969,20 +1005,20 @@
                 },
                 "modes": {
                     "grab": {
-                        "distance": 200,
+                        "distance": 250,
                         "line_linked": {
                             "opacity": 1
                         }
                     },
                     "bubble": {
-                        "distance": 250,
-                        "size": 8,
+                        "distance": 300,
+                        "size": 10,
                         "duration": 2,
-                        "opacity": 0.8,
-                        "speed": 3
+                        "opacity": 0.9,
+                        "speed": 4
                     },
                     "repulse": {
-                        "distance": 300,
+                        "distance": 400,
                         "duration": 0.4
                     }
                 }
@@ -990,16 +1026,49 @@
             "retina_detect": true
         });
         
-        // 鼠标移动交互效果
+        // 增强的鼠标移动交互效果
         document.addEventListener('mousemove', (e) => {
             const robot = document.querySelector('.robot-container');
+            const avatar = document.querySelector('.avatar');
+            const globe = document.querySelector('.globe-gif');
+            
             if (robot) {
-                const x = (window.innerWidth - e.pageX * 2) / 100;
-                const y = (window.innerHeight - e.pageY * 2) / 100;
-                robot.style.transform = `translateX(${x}px) translateY(${y}px)`;
+                const x = (window.innerWidth - e.pageX * 2) / 150;
+                const y = (window.innerHeight - e.pageY * 2) / 150;
+                robot.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${x * 0.1}deg)`;
+            }
+            
+            // 头像跟随鼠标轻微倾斜
+            if (avatar) {
+                const rect = avatar.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const angleX = (e.clientY - centerY) / 30;
+                const angleY = (centerX - e.clientX) / 30;
+                avatar.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            }
+        });
+        
+        // 页面加载完成后启动数字雨效果
+        window.addEventListener('load', () => {
+            createMatrixRain();
+        });
+        
+        // 添加键盘交互效果
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                const components = document.querySelectorAll('.component-card');
+                components.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1.1) rotateY(360deg)';
+                        setTimeout(() => {
+                            card.style.transform = '';
+                        }, 600);
+                    }, index * 100);
+                });
             }
         });
     </script>
 </body>
 </html>
-    
