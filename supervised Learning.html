@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监督学习 - cxyLenbai 的个人网站</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        /* 左侧导航栏样式 */
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        
+        .sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .nav-list {
+            list-style: none;
+        }
+        
+        .nav-list li {
+            margin-bottom: 10px;
+        }
+        
+        .nav-list a {
+            display: block;
+            padding: 8px 15px;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e8f4fc;
+            color: #2980b9;
+            padding-left: 20px;
+        }
+        
+        .nav-list a.active {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .sub-nav {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .sub-nav li {
+            margin-bottom: 5px;
+        }
+        
+        /* 右侧内容区样式 */
+        .content {
+            flex: 1;
+            margin-left: 30px;
+        }
+        
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+        
+        .section h3 {
+            color: #34495e;
+            margin: 15px 0 10px;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+                position: static;
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <h2>监督学习</h2>
+            <ul class="nav-list">
+                <li>
+                    <a href="#classification" class="active">分类模型</a>
+                    <ul class="sub-nav">
+                        <li><a href="#logistic-regression">逻辑回归</a></li>
+                        <li><a href="#svm">支持向量机</a></li>
+                        <li><a href="#decision-tree">决策树</a></li>
+                        <li><a href="#random-forest">随机森林</a></li>
+                        <li><a href="#gbdt">梯度提升树</a></li>
+                        <li><a href="#naive-bayes">朴素贝叶斯</a></li>
+                        <li><a href="#knn">K 近邻</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#regression">回归模型</a>
+                    <ul class="sub-nav">
+                        <li><a href="#linear-regression">线性回归</a></li>
+                        <li><a href="#ridge-regression">岭回归</a></li>
+                        <li><a href="#lasso-regression">Lasso 回归</a></li>
+                        <li><a href="#polynomial-regression">多项式回归</a></li>
+                        <li><a href="#decision-tree-regression">决策树回归</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- 右侧内容区 -->
+        <main class="content">
+            <!-- 分类模型部分 -->
+            <section id="classification" class="section">
+                <h2>分类模型</h2>
+                <p>分类模型是监督学习的一种，用于预测离散的目标变量。它通过学习输入特征与类别标签之间的关系，对新的未知数据进行类别判断。</p>
+                
+                <h3 id="logistic-regression">逻辑回归</h3>
+                <p>逻辑回归是一种用于二分类问题的统计模型，它通过Sigmoid函数将线性回归的结果映射到[0,1]区间，表示事件发生的概率。适用于需要得到概率输出的场景，如信用评分、疾病预测等。</p>
+                
+                <h3 id="svm">支持向量机</h3>
+                <p>支持向量机通过寻找最优超平面来划分不同类别，最大化类别间的间隔。它可以通过核函数处理非线性问题，在小样本、高维空间中表现良好，常用于文本分类、图像识别等领域。</p>
+                
+                <h3 id="decision-tree">决策树</h3>
+                <p>决策树通过树形结构进行决策，每个节点表示一个特征判断，叶子节点表示类别。它易于理解和解释，但容易过拟合，适用于数据探索和规则提取。</p>
+                
+                <h3 id="random-forest">随机森林</h3>
+                <p>随机森林是由多个决策树组成的集成模型，通过投票机制决定最终结果。它减少了单棵决策树的过拟合问题，泛化能力强，适用于各种分类场景。</p>
+                
+                <h3 id="gbdt">梯度提升树</h3>
+                <p>梯度提升树通过迭代生成一系列弱分类器（通常是决策树），每个新的分类器都致力于纠正之前模型的错误。它在许多机器学习竞赛中表现优异，适用于高精度要求的分类任务。</p>
+                
+                <h3 id="naive-bayes">朴素贝叶斯</h3>
+                <p>朴素贝叶斯基于贝叶斯定理和特征条件独立性假设，计算后验概率进行分类。它计算高效，适用于大规模数据集，尤其是文本分类领域。</p>
+                
+                <h3 id="knn">K 近邻</h3>
+                <p>K近邻算法通过计算待分类样本与训练集中样本的距离，选择最近的K个样本的多数类别作为预测结果。它是一种惰性学习算法，适用于非线性数据，但计算成本较高。</p>
+            </section>
+            
+            <!-- 回归模型部分 -->
+            <section id="regression" class="section">
+                <h2>回归模型</h2>
+                <p>回归模型用于预测连续的目标变量，通过建立输入特征与连续输出之间的函数关系，对新数据进行数值预测。</p>
+                
+                <h3 id="linear-regression">线性回归</h3>
+                <p>线性回归假设自变量与因变量之间存在线性关系，通过最小化平方误差来求解模型参数。它是最基础的回归模型，适用于简单的线性关系预测，如房价预测、销售额预测等。</p>
+                
+                <h3 id="ridge-regression">岭回归</h3>
+                <p>岭回归在 linear 回归的基础上加入L2正则化项，用于解决多重共线性问题，防止模型过拟合，提高模型的泛化能力。</p>
+                
+                <h3 id="lasso-regression">Lasso 回归</h3>
+                <p>Lasso回归加入L1正则化项，不仅能防止过拟合，还可以实现特征选择，将不重要特征的系数压缩至0，适用于高维数据建模。</p>
+                
+                <h3 id="polynomial-regression">多项式回归</h3>
+                <p>多项式回归通过引入自变量的高次项，拟合非线性关系。它可以捕捉数据中的非线性模式，但需要注意选择合适的多项式阶数，避免过拟合。</p>
+                
+                <h3 id="decision-tree-regression">决策树回归</h3>
+                <p>决策树回归将连续的目标变量通过树形结构进行分段预测，每个叶子节点对应一个预测值。它可以处理非线性关系，但同样存在过拟合风险，通常结合集成方法使用。</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 实现导航栏点击效果
+        const navLinks = document.querySelectorAll('.nav-list a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // 移除所有链接的active类
+                navLinks.forEach(l => l.classList.remove('active'));
+                // 为当前点击的链接添加active类
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
