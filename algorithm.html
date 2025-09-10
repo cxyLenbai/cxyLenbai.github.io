@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>算法技术 - cxyLenbai</title>
+    <title>算法技术 - Lenbai</title>
     <!-- 引入外部资源 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -100,8 +100,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        
-        
         
         /* 数据流效果 */
         .data-stream {
@@ -320,6 +318,7 @@
             border-color: var(--secondary);
             box-shadow: var(--glow-secondary);
             transform: translateX(10px);
+            cursor: pointer; /* 鼠标悬停时显示指针，提示可点击 */
         }
         
         .card h3 {
@@ -388,8 +387,6 @@
                 filter: hue-rotate(180deg);
             }
         }
-        
-        
         
         @keyframes dataFlow {
             0% { 
@@ -462,7 +459,8 @@
             <!-- 机器学习部分 -->
             <section id="machine-learning" class="section">
                 <h2><i class="fas fa-robot" style="margin-right: 12px;"></i>机器学习</h2>
-                <div class="card">
+                <!-- 监督学习卡片 - 添加了点击跳转功能 -->
+                <div class="card" onclick="window.location.href='supervised Learning.html'">
                     <h3><i class="fas fa-chart-line" style="margin-right: 8px;"></i>监督学习</h3>
                     <p>包括线性回归、逻辑回归、决策树、随机森林、支持向量机(SVM)、朴素贝叶斯等算法。适用于分类和回归问题，需要标注数据进行训练。</p>
                     <div>
@@ -735,3 +733,4 @@
     </script>
 </body>
 </html>
+    
